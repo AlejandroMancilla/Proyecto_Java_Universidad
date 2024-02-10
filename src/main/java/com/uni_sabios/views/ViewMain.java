@@ -1,6 +1,9 @@
 package com.uni_sabios.views;
 
+import java.util.Scanner;
+
 import com.uni_sabios.repository.impl.RepositoryClassroomMysqlImpl;
+import com.uni_sabios.repository.impl.RepositoryCourseMysqlImpl;
 import com.uni_sabios.services.ServiceClassroom;
 import com.uni_sabios.services.ServiceCourse;
 import com.uni_sabios.services.impl.ServiceClassroomImpl;
@@ -10,12 +13,13 @@ public class ViewMain {
 
     public static final ServiceClassroom serviceClassroom = new ServiceClassroomImpl(new RepositoryClassroomMysqlImpl());
     public static final ServiceCourse serviceCourse = new ServiceCourseImpl(new RepositoryCourseMysqlImpl());
+    public static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         
         int opc = 0;
 
         do {
-            opc = menuMain();
+            opc = mainMenu();
             switch (opc) {
                 case 1:
                     ViewStudent.startMenu();
@@ -30,7 +34,7 @@ public class ViewMain {
                     ViewCourse.startMenu();
                     break;
                 case 5:
-                    ViewStudent.startMenu();
+                    ViewSubject.startMenu();
                     break;
                 case 6:
                     ViewPeriod.startMenu();
@@ -53,7 +57,25 @@ public class ViewMain {
                 default:
                     break;
             }
-        }
-        
+        }while(opc>0 && opc<12);
+    }
+
+    public static int mainMenu() {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush(); 
+        System.out.println("*".repeat(10) + " SABIO'S UNIVERSITY SYSTEM " + "*".repeat(10));
+        System.out.println("\t1- Students Management");
+        System.out.println("\t2- Teachers Management");
+        System.out.println("\t3- Programs Management");
+        System.out.println("\t4- Courses Management");
+        System.out.println("\t5- Subjects Management");
+        System.out.println("\t6- Periods Management");
+        System.out.println("\t7- Fares Management");
+        System.out.println("\t8- Departments Management");
+        System.out.println("\t9- Classroom Management");
+        System.out.println("\t10- Schedules Management");
+        System.out.println("\t11- Reports");
+        System.out.println("\t0- Exit");
+        return sc.nextInt();
     }
 }

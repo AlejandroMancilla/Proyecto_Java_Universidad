@@ -4,15 +4,23 @@ import java.util.Scanner;
 
 import com.uni_sabios.repository.impl.RepositoryClassroomMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryCourseMysqlImpl;
+import com.uni_sabios.repository.impl.RepositoryStudentMysqlImpl;
+import com.uni_sabios.repository.impl.RepositoryTeacherMysqlImpl;
 import com.uni_sabios.services.ServiceClassroom;
 import com.uni_sabios.services.ServiceCourse;
+import com.uni_sabios.services.ServiceStudent;
+import com.uni_sabios.services.ServiceTeacher;
 import com.uni_sabios.services.impl.ServiceClassroomImpl;
 import com.uni_sabios.services.impl.ServiceCourseImpl;
+import com.uni_sabios.services.impl.ServiceStudentImpl;
+import com.uni_sabios.services.impl.ServiceTeacherImpl;
 
 public class ViewMain {
 
     public static final ServiceClassroom serviceClassroom = new ServiceClassroomImpl(new RepositoryClassroomMysqlImpl());
     public static final ServiceCourse serviceCourse = new ServiceCourseImpl(new RepositoryCourseMysqlImpl());
+    public static final ServiceStudent serviceStudent = new ServiceStudentImpl(new RepositoryStudentMysqlImpl());
+    public static final ServiceTeacher serviceTeacher = new ServiceTeacherImpl(new RepositoryTeacherMysqlImpl());
     public static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         

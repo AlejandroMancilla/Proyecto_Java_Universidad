@@ -1,5 +1,7 @@
 package com.uni_sabios.views;
 
+import com.uni_sabios.repository.models.Student;
+
 public class ViewStudent extends ViewMain{
 
     public static void startMenu() {
@@ -44,30 +46,56 @@ public class ViewStudent extends ViewMain{
         sc.nextLine();
         System.out.println("*".repeat(40));
         System.out.println("Create a new Student");
+        int typeId = 0;
+        do{
+            System.out.println("- ID Type");
+            System.out.println("\t- 1) CC");
+            System.out.println("\t- 2) TI");
+            System.out.println("\t- 3) Passport");
+            System.out.println("\t- 4) CE");
+            System.out.println("- Choose: ");
+            typeId = sc.nextInt();
+        }while(typeId < 1 || typeId > 4);
+        System.out.print("- Id Number: ");
+        String id = sc.nextLine();
         System.out.print("- Name: ");
-        String Name = sc.nextLine();
+        String name = sc.nextLine();
         System.out.print("- LastName: ");
         String lastName = sc.nextLine();
-        System.out.print("- Id Number: ");
-        int Id = sc.nextInt();
         System.out.println("- Phone Number: ");
-        String Phone = sc.nextLine();
+        String phone = sc.nextLine();
         System.out.println("- Date of Birth");
         System.out.println("\t- Age: ");
-        int Age = sc.nextInt();
+        int age = sc.nextInt();
         System.out.println("\t- Month: ");
-        int Month = sc.nextInt();
+        int month = sc.nextInt();
         System.out.println("\t- Day: "); 
-        int Day = sc.nextInt();
-        System.out.println("- Gender");
-        System.out.println("\t- 1) Male");
-        System.out.println("\t- 2) Female");
-
-        int Age = sc.nextInt();
-        System.out.println("\t- Month: ");
-        int Month = sc.nextInt();
-
-
+        int day = sc.nextInt();
+        String date = age + "-" + month + "-" + day;
+        int gender = 0;
+        do{
+            System.out.println("- Gender");
+            System.out.println("\t- 1) Male");
+            System.out.println("\t- 2) Female");
+            System.out.println("- Choose: ");
+            gender = sc.nextInt();
+        }while(gender < 1 || gender > 2);
+        int city = 0;
+        do{
+            System.out.println("- City of Residence");
+            
+            city = sc.nextInt();
+        }while(city < 1 || city > 5);
+        System.out.println("- Address: ");
+        String address = sc.nextLine();
+        int program = 0;
+        do{
+            System.out.println("- Program");
+            
+            program = sc.nextInt();
+        }while(program < 1 || program > 5);
+        Student student = new Student(typeId, id, name, lastName, phone, date, gender, city, address, program);
+        serviceStudent.create(student);
     }
 
     private static void getStudent() {

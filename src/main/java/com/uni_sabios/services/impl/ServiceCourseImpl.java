@@ -2,7 +2,7 @@ package com.uni_sabios.services.impl;
 
 import java.util.List;
 
-import com.uni_sabios.exceptions.CourseNotFoundException;
+import com.uni_sabios.exceptions.courseexceptions.CourseNullException;
 import com.uni_sabios.repository.RepositoryCourse;
 import com.uni_sabios.repository.models.Course;
 import com.uni_sabios.services.ServiceCourse;
@@ -22,7 +22,7 @@ public class ServiceCourseImpl implements ServiceCourse{
     }
 
     @Override
-    public Course getCourse(String Code) throws CourseNotFoundException {
+    public Course getCourse(String Code) throws CourseNullException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getCourse'");
     }

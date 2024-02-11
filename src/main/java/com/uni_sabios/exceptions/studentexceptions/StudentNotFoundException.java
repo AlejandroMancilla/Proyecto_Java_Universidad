@@ -1,4 +1,4 @@
-package com.uni_sabios.exceptions;
+package com.uni_sabios.exceptions.studentexceptions;
 
 public class StudentNotFoundException extends Exception {
 

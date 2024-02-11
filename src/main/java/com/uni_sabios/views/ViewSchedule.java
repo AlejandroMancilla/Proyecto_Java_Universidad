@@ -36,7 +36,7 @@ public class ViewSchedule extends ViewMain{
 
     private static void createSchedule(){
         
-        serviceSchedule.create(Schedule);
+        //serviceSchedule.create(Schedule);
     }
 
     private static void getSchedule() {

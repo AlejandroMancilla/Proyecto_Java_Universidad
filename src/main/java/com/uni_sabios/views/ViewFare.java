@@ -41,7 +41,7 @@ public class ViewFare extends ViewMain {
 
     private static void createFare(){
         
-        serviceFare.create(Fare);
+        //serviceFare.create(Fare);
     }
 
     private static void getFare() {

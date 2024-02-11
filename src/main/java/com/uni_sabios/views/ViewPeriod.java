@@ -41,7 +41,7 @@ public class ViewPeriod extends ViewMain {
 
     private static void createPeriod(){
         
-        servicePeriod.create(Period);
+        //servicePeriod.create(Period);
     }
 
     private static void getPeriod() {

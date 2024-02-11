@@ -2,7 +2,7 @@ package com.uni_sabios.services.impl;
 
 import java.util.List;
 
-import com.uni_sabios.exceptions.ClassroomNotFoundException;
+import com.uni_sabios.exceptions.classroomexceptions.ClassroomNullException;
 import com.uni_sabios.repository.RepositoryClassroom;
 import com.uni_sabios.repository.models.Classroom;
 import com.uni_sabios.services.ServiceClassroom;
@@ -22,7 +22,7 @@ public class ServiceClassroomImpl implements ServiceClassroom{
     }
 
     @Override
-    public Classroom getClassroom(String Code) throws ClassroomNotFoundException {
+    public Classroom getClassroom(String Code) throws ClassroomNullException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getClassroom'");
     }

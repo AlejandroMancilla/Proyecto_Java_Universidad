@@ -93,8 +93,8 @@ public class ViewTeacher extends ViewMain{
             
             department = sc.nextInt();
         }while(department < 1 || department > 5);
-        Teacher teacher = new Teacher(typeId, id, name, lastName, phone, date, gender, city, address, department);
-        serviceTeacher.create(teacher);
+        //Teacher teacher = new Teacher(typeId, id, name, lastName, phone, date, gender, city, address, department);
+        //serviceTeacher.create(teacher);
     }
 
     private static void getTeacher() {
@@ -110,6 +110,4 @@ public class ViewTeacher extends ViewMain{
     }
     
 }
-    }
-    
-}
+   

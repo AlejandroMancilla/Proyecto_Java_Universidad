@@ -31,17 +31,18 @@ public class ViewReports extends ViewMain{
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
         System.out.println("*".repeat(10) + " Student's Menu " + "*".repeat(10));
-        System.out.println("\t 1) Create a new Student");
-        System.out.println("\t 2) Get Student by ID");
-        System.out.println("\t 3) Edit Student");
-        System.out.println("\t 4) Delete Student");
-        System.out.println("\t 5) Return to Main Menu");
+        System.out.println("\t 1) Students by Course");
+        System.out.println("\t 2) Cost of a Student's semester");
+        System.out.println("\t 3) University income per semester");
+        System.out.println("\t 4) Display a student's timetable");
+        System.out.println("\t 5) Number of Students by Program (Ordered)");
+        System.out.println("\t 6) Return to Main Menu");
         return sc.nextInt();
-    } 
+    }
 
     private static void createReport(){
         
-        serviceReport.create(Report);
+        //serviceReport.create(Report);
     }
 
     private static void getReport() {

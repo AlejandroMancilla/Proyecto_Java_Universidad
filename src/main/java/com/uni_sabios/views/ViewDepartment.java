@@ -41,7 +41,7 @@ public class ViewDepartment extends ViewMain {
 
     private static void createDepartment(){
         
-        serviceDepartment.create(Department);
+        //serviceDepartment.create(Department);
     }
 
     private static void getDepartment() {

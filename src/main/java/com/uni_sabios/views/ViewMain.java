@@ -72,18 +72,20 @@ public class ViewMain {
         System.out.print("\033[H\033[2J");  
         System.out.flush(); 
         System.out.println("*".repeat(10) + " SABIO'S UNIVERSITY SYSTEM " + "*".repeat(10));
-        System.out.println("\t1- Students Management");
-        System.out.println("\t2- Teachers Management");
-        System.out.println("\t3- Programs Management");
-        System.out.println("\t4- Courses Management");
-        System.out.println("\t5- Subjects Management");
-        System.out.println("\t6- Periods Management");
-        System.out.println("\t7- Fares Management");
-        System.out.println("\t8- Departments Management");
-        System.out.println("\t9- Classroom Management");
-        System.out.println("\t10- Schedules Management");
-        System.out.println("\t11- Reports");
-        System.out.println("\t0- Exit");
+        System.out.println("\t 1) Students Management");
+        System.out.println("\t 2) Teachers Management");
+        System.out.println("\t 3) Programs Management");
+        System.out.println("\t 4) Courses Management");
+        System.out.println("\t 5) Subjects Management");
+        System.out.println("\t 6) Periods Management");
+        System.out.println("\t 7) Fares Management");
+        System.out.println("\t 8) Departments Management");
+        System.out.println("\t 9) Classroom Management");
+        System.out.println("\t10) Schedules Management");
+        System.out.println("\t11) Reports");
+        System.out.println("\t 0) Exit");
+        System.out.println("*".repeat(47));
+        System.out.print("Choose an Option: ");
         return sc.nextInt();
     }
 }

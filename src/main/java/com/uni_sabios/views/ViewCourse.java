@@ -41,7 +41,7 @@ public class ViewCourse extends ViewMain{
 
     private static void createCourse(){
         
-        serviceCourse.create(Course);
+        //serviceCourse.create(Course);
     }
 
     private static void getCourse() {

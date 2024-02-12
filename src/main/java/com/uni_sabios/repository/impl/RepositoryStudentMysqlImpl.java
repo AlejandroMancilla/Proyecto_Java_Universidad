@@ -2,12 +2,14 @@ package com.uni_sabios.repository.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.uni_sabios.exceptions.personexceptions.PersonExceptionInsertDataBase;
 import com.uni_sabios.repository.RepositoryStudent;
 import com.uni_sabios.repository.models.Person;
+import com.uni_sabios.repository.models.Schedule;
 import com.uni_sabios.repository.models.Student;
 import com.uni_sabios.utils.conexiondb.conexionbdmysql.ConexionBDMysql;
 
@@ -29,6 +31,27 @@ public class RepositoryStudentMysqlImpl implements RepositoryStudent{
     public Person findByDocument(String document) {
         RepositoryPersonMysqlImpl repositoryPersonMysqlImpl = new RepositoryPersonMysqlImpl();
         return repositoryPersonMysqlImpl.getPerson(document);
+    }
+
+    @Override
+    public Student findById(int personId) {
+        Student student = null;
+        try (PreparedStatement pstmt = getConnection().prepareStatement("SELECT * FROM students WHERE person_id = ?");) {
+            pstmt.setInt(1, personId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    student = createStudent(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return student;
+    }
+
+    private Student createStudent(ResultSet rs) throws SQLException {
+        return new Student(rs.getInt("person_id"), rs.getInt("program_id"));
     }
 
     @Override
@@ -98,6 +121,5 @@ public class RepositoryStudentMysqlImpl implements RepositoryStudent{
             e.printStackTrace();
         }
     }
-
 
 }

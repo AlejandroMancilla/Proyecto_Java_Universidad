@@ -10,6 +10,8 @@ public interface RepositoryPerson {
 
     Person getPerson(String document);
 
+    Person getPersonId(int id);
+
     void create(Person person);
 
     void modify(Person person);

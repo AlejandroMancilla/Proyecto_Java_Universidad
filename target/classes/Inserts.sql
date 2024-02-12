@@ -211,3 +211,4 @@ INSERT INTO tuitions (period_id, program_id, credit_cost) VALUES
 (3, 5, 250000), (3, 6, 220000), (3, 7, 150000), (3, 8, 320000);
 
 
+SELECT * FROM persons p INNER JOIN students s ON p.person_id = s.person_id

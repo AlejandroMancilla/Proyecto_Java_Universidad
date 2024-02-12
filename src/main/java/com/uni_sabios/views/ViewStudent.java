@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.uni_sabios.exceptions.personexceptions.PersonExceptionInsertDataBase;
 import com.uni_sabios.exceptions.personexceptions.PersonNullException;
+import com.uni_sabios.exceptions.programexceptions.ProgramNullException;
+import com.uni_sabios.exceptions.studentexceptions.StudentNullException;
 import com.uni_sabios.repository.impl.RepositoryAddressMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryCityMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryPersonMysqlImpl;
@@ -25,7 +27,7 @@ private static final ServiceAddress serviceAddress = new ServiceAddressImpl(new 
     private static final ServiceCity serviceCity = new ServiceCityImpl(new RepositoryCityMysqlImpl());
     private static final ServicePerson servicePerson = new ServicePersonImpl(new RepositoryPersonMysqlImpl());
 
-    public static void startMenu() {
+    public static void startMenu() throws ProgramNullException, StudentNullException {
 
         int opc = 0;
 
@@ -177,7 +179,7 @@ private static final ServiceAddress serviceAddress = new ServiceAddressImpl(new 
         sc.next();
     }
 
-    private static void getStudent() {
+    private static void getStudent() throws ProgramNullException, StudentNullException {
          System.out.println("Searching a Student...");
         sc.nextLine();
         System.out.print("\t Student's Document: ");
@@ -193,7 +195,7 @@ private static final ServiceAddress serviceAddress = new ServiceAddressImpl(new 
         sc.next();
     }
 
-    private static void modifyStudent() {
+    private static void modifyStudent() throws ProgramNullException, StudentNullException {
         sc.nextLine();
         System.out.println("Editing a Student...");
         System.out.print("\t Student's Document: ");
@@ -273,8 +275,12 @@ private static final ServiceAddress serviceAddress = new ServiceAddressImpl(new 
       
     }
 
-    private static void listStudents() {
-        System.out.println("Students List");
+    private static void listStudents() throws ProgramNullException, StudentNullException {
+        clear();
+        System.out.println("*".repeat(35) + " STUDENT'S LIST " + "*".repeat(35));
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+" + "-".repeat(15) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+");
+        System.out.printf("|%-5s|%-15s|%-30s|%-15s|%-15s|%-30s|\n", "DOC", "ID", "FULL NAME", "PHONE NUMBER", "BIRTHDATE", "PROGRAM");
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+" + "-".repeat(15) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+");
         for (Person student : serviceStudent.list()) {
             student.print();
         }

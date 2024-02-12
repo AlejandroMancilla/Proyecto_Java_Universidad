@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.uni_sabios.exceptions.personexceptions.PersonExceptionInsertDataBase;
 import com.uni_sabios.exceptions.personexceptions.PersonNullException;
+import com.uni_sabios.exceptions.studentexceptions.StudentNullException;
 import com.uni_sabios.repository.RepositoryStudent;
 import com.uni_sabios.repository.models.Person;
 import com.uni_sabios.repository.models.Student;
@@ -29,6 +30,16 @@ public class ServiceStudentImpl implements ServiceStudent{
             throw new PersonNullException("Person not found");
         } else {
             return person;
+        }
+    }
+
+    @Override
+    public Student findbyId(int personId) throws StudentNullException {
+        Student student = crudRepositoryStudent.findById(personId);
+        if(student == null){
+            throw new StudentNullException("Student not found");
+        } else {
+            return student;
         }
     }
 
@@ -61,5 +72,7 @@ public class ServiceStudentImpl implements ServiceStudent{
     public void delete(String document) throws PersonNullException {
         crudRepositoryStudent.delete(document);
     }
+
+    
 }
  

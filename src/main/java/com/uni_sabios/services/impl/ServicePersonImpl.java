@@ -23,6 +23,10 @@ public class ServicePersonImpl implements ServicePerson{
         return crudRepositoryPerson.getPerson(Document);
     }
 
+    public Person findById(int id) {
+        return crudRepositoryPerson.getPersonId(id);
+    }
+
     public void create(Person person) throws PersonExceptionInsertDataBase{
         crudRepositoryPerson.create(person);
     }

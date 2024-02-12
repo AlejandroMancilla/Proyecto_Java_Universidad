@@ -8,6 +8,7 @@ import com.uni_sabios.exceptions.fareexceptions.FareNullException;
 import com.uni_sabios.exceptions.periodexceptions.PeriodNullException;
 import com.uni_sabios.exceptions.personexceptions.PersonException;
 import com.uni_sabios.exceptions.programexceptions.ProgramNullException;
+import com.uni_sabios.exceptions.studentexceptions.StudentNullException;
 import com.uni_sabios.exceptions.subjectexceptions.SubjectNullException;
 import com.uni_sabios.repository.impl.RepositoryAddressMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryCityMysqlImpl;
@@ -74,7 +75,7 @@ public class ViewMain {
     public static final ServiceTeacher serviceTeacher = new ServiceTeacherImpl(new RepositoryTeacherMysqlImpl());
         
     public static final Scanner sc = new Scanner(System.in);
-    public static void main(String[] args) throws SQLException, ProgramNullException, SubjectNullException, FareNullException, PersonException, PeriodNullException, BuildingNullException {
+    public static void main(String[] args) throws SQLException, ProgramNullException, SubjectNullException, FareNullException, PersonException, PeriodNullException, BuildingNullException, StudentNullException {
         
         int opc = 0;
 

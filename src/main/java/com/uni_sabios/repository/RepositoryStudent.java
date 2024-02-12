@@ -12,6 +12,8 @@ public interface RepositoryStudent {
     
     Person findByDocument(String document);
 
+    Student findById(int personId);
+
     void create(Student student);
 
     void create(Person person, int idProgram) throws PersonExceptionInsertDataBase;

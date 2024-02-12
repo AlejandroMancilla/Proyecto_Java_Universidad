@@ -153,4 +153,20 @@ public class RepositoryPersonMysqlImpl implements RepositoryPerson {
 
         return person;
     }
+
+    @Override
+    public Person getPersonId(int id) {
+        Person person = null;
+        try (PreparedStatement stmt = getConnection().prepareStatement("SELECT * FROM persons WHERE person_id = ?");) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery();) {
+                if (rs.next()) {
+                    person = createPerson(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return person;
+    }
 }

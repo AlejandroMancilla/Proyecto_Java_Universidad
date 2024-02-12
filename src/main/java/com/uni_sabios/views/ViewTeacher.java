@@ -5,6 +5,8 @@ import java.util.List;
 import com.uni_sabios.exceptions.personexceptions.PersonException;
 import com.uni_sabios.exceptions.personexceptions.PersonExceptionInsertDataBase;
 import com.uni_sabios.exceptions.personexceptions.PersonNullException;
+import com.uni_sabios.exceptions.programexceptions.ProgramNullException;
+import com.uni_sabios.exceptions.studentexceptions.StudentNullException;
 import com.uni_sabios.repository.models.Address;
 import com.uni_sabios.repository.models.City;
 import com.uni_sabios.repository.models.Department;
@@ -12,7 +14,7 @@ import com.uni_sabios.repository.models.Person;
 import com.uni_sabios.repository.models.Teacher;
 
 public class ViewTeacher extends ViewMain{
-    public static void startMenu() throws PersonException {
+    public static void startMenu() throws PersonException, ProgramNullException, StudentNullException {
 
         int opc = 0;
 
@@ -41,7 +43,7 @@ public class ViewTeacher extends ViewMain{
                     sc.next();
             }
             
-        }while(opc>0 && opc<4);
+        }while(opc>0);
     }
 
     private static int showMenu() {
@@ -52,7 +54,8 @@ public class ViewTeacher extends ViewMain{
         System.out.println("\t 2) Get Teacher by ID");
         System.out.println("\t 3) Edit Teacher");
         System.out.println("\t 4) Delete Teacher");
-        System.out.println("\t 5) Return to Main Menu");
+        System.out.println("\t 5) List Teachers");
+        System.out.println("\t 0) Return to Main Menu");
         System.out.println("*".repeat(35));
         System.out.print("Choose an Option: ");
         return sc.nextInt();
@@ -155,7 +158,7 @@ public class ViewTeacher extends ViewMain{
         sc.next();
     }
 
-    private static void modifyTeacher() throws PersonException {
+    private static void modifyTeacher() throws PersonException, ProgramNullException, StudentNullException {
         sc.nextLine();
         System.out.println("Modifying a Teacher...");
         System.out.print("\t Teacher's Document: ");
@@ -231,7 +234,7 @@ public class ViewTeacher extends ViewMain{
         }
     }
 
-    private static void listTeachers() {
+    private static void listTeachers() throws ProgramNullException, StudentNullException {
         System.out.println("Teachers List");
         for (Person teacher : serviceTeacher.list()){
             teacher.print();

@@ -17,31 +17,31 @@ public class ServiceCourseImpl implements ServiceCourse{
 
     @Override
     public List<Course> list() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'list'");
+        return this.crudRepositoryCourse.list();
     }
 
     @Override
-    public Course getCourse(String Code) throws CourseNullException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCourse'");
+    public Course getCourse(int courseId) throws CourseNullException {
+        Course course = this.crudRepositoryCourse.getCourse(courseId);
+        if(course != null){
+            return course;
+        }else{
+            throw new CourseNullException("No Course with this id was found");
+        }
     }
 
     @Override
     public void create(Course course) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+        this.crudRepositoryCourse.create(course);
     }
 
     @Override
     public void modify(Course course) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'modify'");
+        this.crudRepositoryCourse.modify(course);
     }
 
     @Override
     public void delete(Course course) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        this.crudRepositoryCourse.delete(course);
     }
 }

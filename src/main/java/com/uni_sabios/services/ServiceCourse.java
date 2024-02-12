@@ -8,7 +8,7 @@ import com.uni_sabios.repository.models.Course;
 public interface ServiceCourse {
     List<Course> list();
 
-    Course getCourse(String Code) throws CourseNullException;
+    Course getCourse(int courseId) throws CourseNullException;
 
     void create(Course course);
 

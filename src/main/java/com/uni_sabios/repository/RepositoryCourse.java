@@ -8,11 +8,11 @@ public interface RepositoryCourse {
     
     List<Course> list();
 
-    Course getClassroom(String Code);
+    Course getCourse(int courseId);
 
     void create(Course course);
 
-    void edit(Course course);
+    void modify(Course course);
 
     void delete(Course course);
 }

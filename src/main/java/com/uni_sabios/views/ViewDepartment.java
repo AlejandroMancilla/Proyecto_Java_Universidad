@@ -27,11 +27,14 @@ public class ViewDepartment extends ViewMain {
                 case 5:
                     listDepartments();
                     break;
-                default:
+                case 0:
                     break;
+                default:
+                    System.out.println("Not Available Choice");
+                    sc.next();
             }
             
-        }while(opc>0 && opc<4);
+        }while(opc>0);
     }
 
         private static int showMenu() {
@@ -41,7 +44,9 @@ public class ViewDepartment extends ViewMain {
         System.out.println("\t 3) Edit Department");
         System.out.println("\t 4) Delete Department");
         System.out.println("\t 5) List Departments");
-        System.out.println("\t 6) Return to Main Menu");
+        System.out.println("\t 0) Return to Main Menu");
+        System.out.println("*".repeat(35));
+        System.out.print("Choose an Option: ");
         return sc.nextInt();
     } 
 
@@ -69,7 +74,7 @@ public class ViewDepartment extends ViewMain {
     public static void printDepartment() {
         System.out.println("Searching a Department...");
         sc.nextLine();
-        System.out.print("Documento: ");
+        System.out.print("ID: ");
         int id = sc.nextInt();
 
         try {

@@ -27,10 +27,13 @@ public class ViewProgram extends ViewMain{
                 case 5:
                     listPrograms();
                     break;
-                default:
+                case 0:
                     break;
+                default:
+                    System.out.println("Not Available Choice");
+                    sc.next();
             }
-        }while(opc>0 && opc<6);
+        }while(opc>0);
     }
 
     private static int showMenu() {
@@ -40,7 +43,9 @@ public class ViewProgram extends ViewMain{
         System.out.println("\t 3) Edit Program");
         System.out.println("\t 4) Delete Program");
         System.out.println("\t 5) List Programs");
-        System.out.println("\t 6) Return to Main Menu");
+        System.out.println("\t 0) Return to Main Menu");
+        System.out.println("*".repeat(35));
+        System.out.print("Choose an Option: ");
         return sc.nextInt();
     } 
 
@@ -80,7 +85,7 @@ public class ViewProgram extends ViewMain{
     public static void printProgram() {
         System.out.println("Searching a Program...");
         sc.nextLine();
-        System.out.print("Documento: ");
+        System.out.print("ID: ");
         int id = sc.nextInt();
         try {
             Program program = serviceProgram.getProgram(id);
@@ -126,6 +131,7 @@ public class ViewProgram extends ViewMain{
     }
 
     private static void deleteProgram() {
+        System.out.println("Deleting a Program...");
         Program program = getProgram();
         if(program != null) {
             serviceProgram.delete(program);

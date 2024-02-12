@@ -5,30 +5,39 @@ import java.util.Scanner;
 import com.uni_sabios.repository.impl.RepositoryClassroomMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryCourseMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryDepartmentMysqlImpl;
+import com.uni_sabios.repository.impl.RepositoryFareMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryProgramMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryStudentMysqlImpl;
+import com.uni_sabios.repository.impl.RepositorySubjectMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryTeacherMysqlImpl;
 import com.uni_sabios.services.ServiceClassroom;
 import com.uni_sabios.services.ServiceCourse;
 import com.uni_sabios.services.ServiceDepartment;
+import com.uni_sabios.services.ServiceFare;
 import com.uni_sabios.services.ServiceProgram;
 import com.uni_sabios.services.ServiceStudent;
+import com.uni_sabios.services.ServiceSubject;
 import com.uni_sabios.services.ServiceTeacher;
 import com.uni_sabios.services.impl.ServiceClassroomImpl;
 import com.uni_sabios.services.impl.ServiceCourseImpl;
 import com.uni_sabios.services.impl.ServiceDepartmentImpl;
+import com.uni_sabios.services.impl.ServiceFareImpl;
 import com.uni_sabios.services.impl.ServiceProgramImpl;
 import com.uni_sabios.services.impl.ServiceStudentImpl;
+import com.uni_sabios.services.impl.ServiceSubjectImpl;
 import com.uni_sabios.services.impl.ServiceTeacherImpl;
 
 public class ViewMain {
 
     public static final ServiceClassroom serviceClassroom = new ServiceClassroomImpl(new RepositoryClassroomMysqlImpl());
     public static final ServiceCourse serviceCourse = new ServiceCourseImpl(new RepositoryCourseMysqlImpl());
-    public static final ServiceStudent serviceStudent = new ServiceStudentImpl(new RepositoryStudentMysqlImpl());
-    public static final ServiceTeacher serviceTeacher = new ServiceTeacherImpl(new RepositoryTeacherMysqlImpl());
-    public static final ServiceProgram serviceProgram = new ServiceProgramImpl(new RepositoryProgramMysqlImpl());
     public static final ServiceDepartment serviceDepartment = new ServiceDepartmentImpl(new RepositoryDepartmentMysqlImpl());
+    public static final ServiceFare serviceFare = new ServiceFareImpl(new RepositoryFareMysqlImpl());
+    public static final ServiceProgram serviceProgram = new ServiceProgramImpl(new RepositoryProgramMysqlImpl());
+    public static final ServiceStudent serviceStudent = new ServiceStudentImpl(new RepositoryStudentMysqlImpl());
+    public static final ServiceSubject serviceSubject = new ServiceSubjectImpl(new RepositorySubjectMysqlImpl());
+    public static final ServiceTeacher serviceTeacher = new ServiceTeacherImpl(new RepositoryTeacherMysqlImpl());
+        
     public static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         

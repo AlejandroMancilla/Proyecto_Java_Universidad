@@ -2,17 +2,18 @@ package com.uni_sabios.services;
 
 import java.util.List;
 
-import com.uni_sabios.exceptions.studentexceptions.StudentNullException;
+import com.uni_sabios.exceptions.personexceptions.PersonException;
+import com.uni_sabios.repository.models.Person;
 import com.uni_sabios.repository.models.Student;
 
 public interface ServiceStudent {
-    List<Student> list();
+    List<Person> list();
 
-    Student getStudent(String id) throws StudentNullException;
+    Person getPerson(String id) throws PersonException;
 
-    void create(Student Student);
+    void create(Student student);
 
-    void modify(Student Student);
+    void modify(Student student);
 
-    void delete(Student Student);
+    void delete(Student student);
 }

@@ -94,8 +94,8 @@ public class ViewStudent extends ViewMain{
             
             program = sc.nextInt();
         }while(program < 1 || program > 5);
-        Student student = new Student(typeId, id, name, lastName, phone, date, gender, city, address, program);
-        serviceStudent.create(student);
+        //Student student = new Student(typeId, id, name, lastName, phone, date, gender, city, address, program);
+        //serviceStudent.create(student);
     }
 
     private static void getStudent() {

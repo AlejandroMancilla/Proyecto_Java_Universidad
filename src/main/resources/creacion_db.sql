@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS registers (
 
 CREATE TABLE IF NOT EXISTS schedules (
 	schedule_id int AUTO_INCREMENT,
-	schedule_day ENUM ('Lunes','Martes','Miercoles','Jueves','Viernes') NOT NULL,
+	schedule_day ENUM ('Monday','Tuesday','Wednesday','Thursday','Friday') NOT NULL,
 	start_time TIME NOT NULL,
 	end_time TIME,
 	classroom_id int,

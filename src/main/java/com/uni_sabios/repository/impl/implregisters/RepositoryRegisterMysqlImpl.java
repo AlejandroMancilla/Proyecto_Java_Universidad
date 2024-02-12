@@ -53,7 +53,7 @@ public class RepositoryRegisterMysqlImpl implements RepositoryRegister{
         try (PreparedStatement pstmt = getConnection().prepareStatement("INSERT INTO registers (student_id, period_id, signature_id) VALUES (?, ?, ?)");) {
             pstmt.setInt(1, register.getStudentId());
             pstmt.setInt(2, register.getPeriodId());
-            pstmt.setInt(3, register.getSignatureId());
+            pstmt.setInt(3, register.getSubjectId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,7 +65,7 @@ public class RepositoryRegisterMysqlImpl implements RepositoryRegister{
         try (PreparedStatement pstmt = getConnection().prepareStatement("UPDATE registers SET student_id = ?, period_id = ?, signature_id = ? WHERE register_id = ?");) {
             pstmt.setInt(1, register.getStudentId());
             pstmt.setInt(2, register.getPeriodId());
-            pstmt.setInt(3, register.getSignatureId());
+            pstmt.setInt(3, register.getSubjectId());
             pstmt.setInt(4, register.getId());
             pstmt.executeUpdate();
         } catch (SQLException e) {

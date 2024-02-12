@@ -2,17 +2,18 @@ package com.uni_sabios.repository;
 
 import java.util.List;
 
+import com.uni_sabios.exceptions.classroomexceptions.ClassroomExceptionInsertDataBase;
 import com.uni_sabios.repository.models.Classroom;
 
 public interface RepositoryClassroom {
 
     List<Classroom> list();
 
-    Classroom getClassroom(String Code);
+    Classroom getClassroom(int classroomId);
 
-    void create(Classroom Classroom);
+    void create(Classroom classroom) throws ClassroomExceptionInsertDataBase;
 
-    void edit(Classroom Classroom);
+    void modify(Classroom classroom);
 
-    void delete(Classroom Classroom);
+    void delete(Classroom classroom);
 }

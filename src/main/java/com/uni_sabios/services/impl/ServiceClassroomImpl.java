@@ -2,6 +2,7 @@ package com.uni_sabios.services.impl;
 
 import java.util.List;
 
+import com.uni_sabios.exceptions.classroomexceptions.ClassroomExceptionInsertDataBase;
 import com.uni_sabios.exceptions.classroomexceptions.ClassroomNullException;
 import com.uni_sabios.repository.RepositoryClassroom;
 import com.uni_sabios.repository.models.Classroom;
@@ -10,39 +11,31 @@ import com.uni_sabios.services.ServiceClassroom;
 public class ServiceClassroomImpl implements ServiceClassroom{
     
     private final RepositoryClassroom crudRepositoryClassroom;
-    
-    public ServiceClassroomImpl(RepositoryClassroom crudRepositoryClassroom){
+
+    public ServiceClassroomImpl(RepositoryClassroom crudRepositoryClassroom) {
         this.crudRepositoryClassroom = crudRepositoryClassroom;
     }
-
-    @Override
+    
     public List<Classroom> list() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'list'");
+        return crudRepositoryClassroom.list();
+    
     }
 
-    @Override
-    public Classroom getClassroom(String Code) throws ClassroomNullException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getClassroom'");
+    public Classroom getClassroom(int classroomId) throws ClassroomNullException{
+        return crudRepositoryClassroom.getClassroom(classroomId);
     }
 
-    @Override
-    public void create(Classroom classroom) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+    public void create(Classroom classroom) throws ClassroomExceptionInsertDataBase{
+        this.crudRepositoryClassroom.create(classroom);
     }
 
-    @Override
-    public void modify(Classroom classroom) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'modify'");
+    public void modify(Classroom classroom){
+        this.crudRepositoryClassroom.modify(classroom);
     }
 
-    @Override
-    public void delete(Classroom classroom) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public void delete(Classroom classroom){
+        this.crudRepositoryClassroom.delete(classroom);
     }
+
     
 }

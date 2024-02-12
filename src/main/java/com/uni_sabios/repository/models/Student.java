@@ -1,12 +1,22 @@
 package com.uni_sabios.repository.models;
 
-public class Student extends Person{
+import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-    private int program;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Student{
+    
+    private int id;
+    private int programId;
+    private int personId;
+    
 
-    public Student(int typeId, String id, String name, String lastName, String phone, String date, int gender, int city, String address, int program) {
-        super();
-        this.program = program;
+    public Student(int programId, int personId) {
+        this.programId = programId;
+        this.personId = personId;
     }
 
 }

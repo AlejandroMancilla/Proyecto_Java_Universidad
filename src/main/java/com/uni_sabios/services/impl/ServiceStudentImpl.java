@@ -2,46 +2,45 @@ package com.uni_sabios.services.impl;
 
 import java.util.List;
 
-import com.uni_sabios.exceptions.studentexceptions.StudentNullException;
+import com.uni_sabios.exceptions.personexceptions.PersonException;
 import com.uni_sabios.repository.RepositoryStudent;
+import com.uni_sabios.repository.models.Person;
 import com.uni_sabios.repository.models.Student;
 import com.uni_sabios.services.ServiceStudent;
+
+
 
 public class ServiceStudentImpl implements ServiceStudent{
 
     private final RepositoryStudent crudRepositoryStudent;
-    
-    public ServiceStudentImpl(RepositoryStudent crudRepositoryStudent){
+
+    public ServiceStudentImpl(RepositoryStudent crudRepositoryStudent) {
         this.crudRepositoryStudent = crudRepositoryStudent;
     }
-
-    @Override
-    public List<Student> list() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'list'");
+    
+    public List<Person> list(){
+        return crudRepositoryStudent.list();
+    }
+    
+    public Person getPerson(String document) throws PersonException {
+        Person person = crudRepositoryStudent.getPerson(document);
+        if(person == null){
+            throw new PersonException("Person not found");
+        } else {
+            return person;
+        }
     }
 
-    @Override
-    public void create(Student Student) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+    public void create(Student student) {
+        crudRepositoryStudent.create(student);
     }
 
-    @Override
-    public void modify(Student Student) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'modify'");
+    public void modify(Student student) {
+        crudRepositoryStudent.modify(student);
     }
 
-    @Override
-    public void delete(Student Student) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public void delete(Student student) {
+        crudRepositoryStudent.delete(student);
     }
 
-    @Override
-    public Student getStudent(String id) throws StudentNullException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getStudent'");
-    }
 }

@@ -1,9 +1,14 @@
 package com.uni_sabios.repository.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
+import com.uni_sabios.exceptions.classroomexceptions.ClassroomExceptionInsertDataBase;
 import com.uni_sabios.repository.RepositoryClassroom;
 import com.uni_sabios.repository.models.Classroom;
 import com.uni_sabios.utils.conexiondb.conexionbdmysql.ConexionBDMysql;
@@ -16,32 +21,94 @@ public class RepositoryClassroomMysqlImpl implements RepositoryClassroom {
 
     @Override
     public List<Classroom> list() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'list'");
+        List<Classroom> listClassrooms = new ArrayList<>();
+        try (Statement stmt = getConnection().createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT * FROM classrooms");) {
+            while (rs.next()) {
+                listClassrooms.add(createClassroom(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listClassrooms;
     }
 
     @Override
-    public Classroom getClassroom(String Code) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getClassroom'");
+    public Classroom getClassroom(int classroomId) {
+        Classroom classroom = null;
+        try (PreparedStatement pstmt = getConnection().prepareStatement("SELECT * FROM classrooms WHERE classroom_id = ?");) {
+            pstmt.setInt(1, classroomId);
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    classroom = createClassroom(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return classroom;
     }
 
     @Override
-    public void create(Classroom Classroom) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'create'");
+    public void create(Classroom classroom) throws ClassroomExceptionInsertDataBase {
+        Connection conn = null;
+
+        try {
+            conn = getConnection();
+            conn.setAutoCommit(false);
+
+            try (PreparedStatement pstmt = conn.prepareStatement("INSERT INTO classrooms (classroom_capacity, classroom_level, classroom_code, building_id) VALUES (?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);) {
+                pstmt.setInt(1, classroom.getCapacity());
+                pstmt.setInt(2, classroom.getLevel());
+                pstmt.setString(3, classroom.getName());
+                pstmt.setInt(4, classroom.getBuildingId());
+                pstmt.executeUpdate();
+                try (ResultSet rs = pstmt.getGeneratedKeys();) {
+                    if (rs.next()) {
+                        classroom.setId(rs.getInt(1));
+                    } else {
+                        throw new ClassroomExceptionInsertDataBase("Error creating classroom, no ID obtained.");
+                    }
+                }
+            }
+            conn.commit();
+        } catch (SQLException e) {
+            try {
+                if (conn != null) {
+                    conn.rollback();
+                }
+            } catch (SQLException e1) {
+                e1.printStackTrace();
+            }
+            throw new ClassroomExceptionInsertDataBase("Error creating classroom");
+        }
     }
 
     @Override
-    public void edit(Classroom Classroom) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'edit'");
+    public void modify(Classroom classroom) {
+        try (PreparedStatement pstmt = getConnection().prepareStatement("UPDATE classrooms SET classroom_capacity = ?, classroom_name = ?, building_id = ? WHERE classroom_id = ?");) {
+            pstmt.setInt(1, classroom.getCapacity());
+            pstmt.setString(2, classroom.getName());
+            pstmt.setInt(3, classroom.getBuildingId());
+            pstmt.setInt(4, classroom.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void delete(Classroom Classroom) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public void delete(Classroom classroom) {
+        try (PreparedStatement pstmt = getConnection().prepareStatement("DELETE FROM classrooms WHERE classroom_id = ?");) {
+            pstmt.setInt(1, classroom.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Classroom createClassroom(ResultSet rs) throws SQLException {
+        return new Classroom(rs.getInt("classroom_id"), rs.getInt("classroom_capacity"), rs.getInt("classroom_level"), rs.getString("classroom_code"), rs.getInt("building_id"));
     }
     
 }

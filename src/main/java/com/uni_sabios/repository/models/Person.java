@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class Person {
     private int id;
-    private int typeId;
+    private String typeId;
     private String numId;
     private String name;
     private String lastName;
@@ -18,10 +18,10 @@ public class Person {
     private String dateBirth;
     private int gender;
     private int cityResidence;
-    private String address;
+    private int addressId;
 
-    public Person(int typeId, String numId, String name, String lastName, String phoneNumber, String dateBirth,
-            int gender, int cityResidence, String address) {
+    public Person(String typeId, String numId, String name, String lastName, String phoneNumber, String dateBirth,
+            int gender, int cityResidence, int address) {
         this.typeId = typeId;
         this.numId = numId;
         this.name = name;
@@ -30,7 +30,7 @@ public class Person {
         this.dateBirth = dateBirth;
         this.gender = gender;
         this.cityResidence = cityResidence;
-        this.address = address;
+        this.addressId = address;
     }
 
     public String getFullName() {

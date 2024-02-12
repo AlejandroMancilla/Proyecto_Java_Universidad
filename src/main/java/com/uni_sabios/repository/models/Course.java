@@ -17,9 +17,7 @@ public class Course {
     }
 
     public void print() {
-        System.out.println("-".repeat(30));
-        System.out.println("\t    ID: " + getId());
-        System.out.println("\t  Name: " + getName());
-        System.out.println("-".repeat(30));
+        System.out.printf("|%5s|%40s|\n", getId(), getName());
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(40)+ "+");
     }
 }

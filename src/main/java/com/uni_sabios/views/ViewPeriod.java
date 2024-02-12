@@ -10,6 +10,7 @@ public class ViewPeriod extends ViewMain {
         int opc = 0;
 
         do {
+            clear();
             opc = showMenu();
             switch (opc) {
                 case 1:
@@ -35,14 +36,12 @@ public class ViewPeriod extends ViewMain {
     }
 
     private static int showMenu() {
-        System.out.print("\033[H\033[2J");  
-        System.out.flush(); 
         System.out.println("*".repeat(10) + " Period's Menu " + "*".repeat(10));
         System.out.println("\t 1) Create a new Period");
         System.out.println("\t 2) Get Period by ID");
         System.out.println("\t 3) Edit Period");
         System.out.println("\t 4) List Periods");
-        System.out.println("\t 5) Return to Main Menu");
+        System.out.println("\t 0) Return to Main Menu");
         System.out.println("*".repeat(35));
         System.out.print("Choose an Option: ");
         return sc.nextInt();
@@ -124,10 +123,13 @@ public class ViewPeriod extends ViewMain {
     }
 
     public static void listPeriods() {
-        System.out.println("Period's List");
+        clear();
+        System.out.println("*".repeat(10) + " PERIOD'S LIST" + "*".repeat(10));
+        System.out.println("+" + "-".repeat(32) + "+");
+        System.out.printf("|%-5s|%-8s|%-8s|%-8s|\n", "ID", "YEAR", "CICLE", "CODE");
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(8)+ "+" + "-".repeat(8) + "+" + "-".repeat(8)+ "+");
         for(Period period : servicePeriod.list()) {
             period.print();
-            System.out.println();
         }
         sc.next();
     }

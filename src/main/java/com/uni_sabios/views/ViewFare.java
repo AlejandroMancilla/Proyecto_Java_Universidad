@@ -1,11 +1,13 @@
 package com.uni_sabios.views;
 
 import com.uni_sabios.exceptions.fareexceptions.FareNullException;
+import com.uni_sabios.exceptions.periodexceptions.PeriodNullException;
+import com.uni_sabios.exceptions.programexceptions.ProgramNullException;
 import com.uni_sabios.repository.models.Fare;
 
 public class ViewFare extends ViewMain {
 
-    public static void startMenu() {
+    public static void startMenu() throws ProgramNullException, PeriodNullException {
         int opc = 0;
 
         do {
@@ -36,7 +38,7 @@ public class ViewFare extends ViewMain {
 
     
     private static int showMenu() {
-        System.out.println("*".repeat(10) + " Fare's Menu " + "*".repeat(10));
+        System.out.println("*".repeat(13) + " Fare's Menu " + "*".repeat(13));
         System.out.println("\t 1) Create a new Fare");
         System.out.println("\t 2) Get Fare by ID");
         System.out.println("\t 3) Edit Fare");
@@ -73,7 +75,7 @@ public class ViewFare extends ViewMain {
         }
     }
 
-    private static void printFare() {
+    private static void printFare() throws ProgramNullException, PeriodNullException {
         System.out.println("Searching a Fare...");
         sc.nextLine();
         System.out.print("ID: ");
@@ -118,11 +120,14 @@ public class ViewFare extends ViewMain {
         sc.next(); 
     }
 
-    private static void listFares() {
-        System.out.println("Fare's List");
+    private static void listFares() throws ProgramNullException, PeriodNullException {
+        clear();
+        System.out.println("*".repeat(28) + " FARE'S LIST" + "*".repeat(28));
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(30) + "+" + "-".repeat(10) + "+" + "-".repeat(20) + "+");
+        System.out.printf("|%-5s|%-30s|%-10s|%-20s|\n", "ID", "PROGRAM", "PERIOD", "CREDITVALUE");
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(30) + "+" + "-".repeat(10) + "+" + "-".repeat(20) + "+");
         for(Fare fare : serviceFare.list()) {
             fare.print();
-            System.out.println();
         }
         sc.next();
     }

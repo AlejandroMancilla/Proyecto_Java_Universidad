@@ -21,12 +21,8 @@ public class Period {
     }
 
     public void print(){
-        System.out.println("-".repeat(30));
-        System.out.println("\t       ID: " + getId());
-        System.out.println("\t     Year: " + getYear());
-        System.out.println("\t Semester: " + getSemester());
-        System.out.println("\t     Code: " + getCode());
-        System.out.println("-".repeat(30));
+        System.out.printf("|%-5s|%-8s|%-8s|%-8s|\n", getId(), getYear().substring(0,4), getSemester(), getCode());
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(8)+ "+" + "-".repeat(8) + "+" + "-".repeat(8)+ "+");
     }
 
 }

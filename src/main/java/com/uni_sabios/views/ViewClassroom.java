@@ -2,6 +2,7 @@ package com.uni_sabios.views;
 
 import java.util.List;
 
+import com.uni_sabios.exceptions.buildingexceptions.BuildingNullException;
 import com.uni_sabios.exceptions.classroomexceptions.ClassroomExceptionInsertDataBase;
 import com.uni_sabios.exceptions.classroomexceptions.ClassroomNullException;
 import com.uni_sabios.repository.impl.RepositoryBuildingMysqlImpl;
@@ -14,7 +15,7 @@ public class ViewClassroom extends ViewMain{
 
     private static final ServiceBuilding serviceBuilding = new ServiceBuildingImpl(new RepositoryBuildingMysqlImpl());
 
-    public static void startMenu() {
+    public static void startMenu() throws BuildingNullException {
         int opc = 0;
 
         do {
@@ -89,7 +90,7 @@ public class ViewClassroom extends ViewMain{
         
     }
 
-    private static void getClassroom() {
+    private static void getClassroom() throws BuildingNullException {
         System.out.println("Searching a Classroom...");
         sc.nextLine();
         System.out.print("\t Classroom's ID: ");
@@ -103,14 +104,15 @@ public class ViewClassroom extends ViewMain{
         }
     }
 
-    
-    private static void listClassrooms() {
-        System.out.println("Classrooms List");
+    private static void listClassrooms() throws BuildingNullException {
+        clear();
+        System.out.println("*".repeat(26) + " CLASSROOM'S LIST " + "*".repeat(25));
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(8) + "+" + "-".repeat(30) + "+" + "-".repeat(10) + "+" + "-".repeat(10) + "+");
+        System.out.printf("|%-5s|%-8s|%-30s|%-10s|%-10s|\n", "ID", "NAME", "BUILDING", "LEVEL", "CAPACITY");
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(8) + "+" + "-".repeat(30) + "+" + "-".repeat(10) + "+" + "-".repeat(10) + "+");
         for (Classroom classroom : serviceClassroom.list()) {
             classroom.print();
-            System.out.println();
         }
         sc.next();
     }
-    
 }

@@ -125,10 +125,13 @@ public class ViewCourse extends ViewMain{
     }
 
     private static void listCourses() {
-        System.out.println("Course's List");
+        clear();
+        System.out.println("*".repeat(17) + " COURSE'S LIST" + "*".repeat(17));
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(40)+ "+");
+        System.out.printf("|%-5s|%-40s|\n", "ID", "NAME");
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(40)+ "+");
         for(Course course : serviceCourse.list()) {
             course.print();
-            System.out.println();
         }
         sc.next();
     }

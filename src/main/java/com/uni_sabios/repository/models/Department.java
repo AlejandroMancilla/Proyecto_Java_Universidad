@@ -15,8 +15,7 @@ public class Department {
     }
 
     public void print() {
-        System.out.printf("|%5s|%20S|\n", getId(), getName());
-        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(20)+ "+");
+        System.out.printf("|%5s|%40s|\n", getId(), getName());
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(40)+ "+");
     }
-
 }

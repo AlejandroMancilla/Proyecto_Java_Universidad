@@ -1,6 +1,12 @@
 package com.uni_sabios.repository.models;
 
 import lombok.Data;
+
+import com.uni_sabios.exceptions.buildingexceptions.BuildingNullException;
+import com.uni_sabios.repository.impl.RepositoryBuildingMysqlImpl;
+import com.uni_sabios.services.ServiceBuilding;
+import com.uni_sabios.services.impl.ServiceBuildingImpl;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -8,6 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Classroom {
+
+    private static final ServiceBuilding serviceBuilding = new ServiceBuildingImpl(new RepositoryBuildingMysqlImpl());
     
     private int id;
     private int capacity;
@@ -22,14 +30,9 @@ public class Classroom {
         this.buildingId = buildingId;
     }
 
-    public void print() {
-        System.out.println("-".repeat(30));
-        System.out.println("\t    ID: " + getId());
-        System.out.println("\t  Name: " + getName());
-        System.out.println("\t Level: " + getLevel());
-        System.out.println("\t   Cap: " + getCapacity());
-        System.out.println("\t   BID: " + getBuildingId());
-        System.out.println("-".repeat(30));
+    public void print() throws BuildingNullException {
+        System.out.printf("|%-5s|%-8s|%-30s|%-10s|%-10s|\n", getId(), getName(), serviceBuilding.getBuilding(getBuildingId()).getName(), getLevel(), getCapacity());
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(8) + "+" + "-".repeat(30) + "+" + "-".repeat(10) + "+" + "-".repeat(10) + "+");
     }
 
 }

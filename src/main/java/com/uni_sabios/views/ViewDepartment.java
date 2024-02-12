@@ -121,10 +121,13 @@ public class ViewDepartment extends ViewMain {
     }
 
     private static void listDepartments() {
-        System.out.println("Department's List");
+        clear();
+        System.out.println("*".repeat(15) + " DEPARTMENT'S LIST" + "*".repeat(15));
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(40)+ "+");
+        System.out.printf("|%-5s|%-40s|\n", "ID", "NAME");
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(40)+ "+");
         for(Department department : serviceDepartment.list()) {
             department.print();
-            System.out.println();
         }
         sc.next();
     }

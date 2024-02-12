@@ -31,8 +31,14 @@ public class ViewTeacher extends ViewMain{
                 case 4:
                     deleteTeacher();
                     break;
-                default:
+                case 5:
+                    listTeachers();
                     break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Not Available Choice");
+                    sc.next();
             }
             
         }while(opc>0 && opc<4);
@@ -47,6 +53,8 @@ public class ViewTeacher extends ViewMain{
         System.out.println("\t 3) Edit Teacher");
         System.out.println("\t 4) Delete Teacher");
         System.out.println("\t 5) Return to Main Menu");
+        System.out.println("*".repeat(35));
+        System.out.print("Choose an Option: ");
         return sc.nextInt();
     } 
 
@@ -221,6 +229,14 @@ public class ViewTeacher extends ViewMain{
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    private static void listTeachers() {
+        System.out.println("Teachers List");
+        for (Person teacher : serviceTeacher.list()){
+            teacher.print();
+        }
+        sc.next();
     }
 }
 

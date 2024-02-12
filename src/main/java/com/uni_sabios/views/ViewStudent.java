@@ -1,14 +1,36 @@
 package com.uni_sabios.views;
 
+import java.util.List;
+
+import com.uni_sabios.exceptions.personexceptions.PersonExceptionInsertDataBase;
+import com.uni_sabios.exceptions.personexceptions.PersonNullException;
+import com.uni_sabios.repository.impl.RepositoryAddressMysqlImpl;
+import com.uni_sabios.repository.impl.RepositoryCityMysqlImpl;
+import com.uni_sabios.repository.impl.RepositoryPersonMysqlImpl;
+import com.uni_sabios.repository.models.Address;
+import com.uni_sabios.repository.models.City;
+import com.uni_sabios.repository.models.Person;
+import com.uni_sabios.repository.models.Program;
 import com.uni_sabios.repository.models.Student;
+import com.uni_sabios.services.ServiceAddress;
+import com.uni_sabios.services.ServiceCity;
+import com.uni_sabios.services.ServicePerson;
+import com.uni_sabios.services.impl.ServiceAddressImpl;
+import com.uni_sabios.services.impl.ServiceCityImpl;
+import com.uni_sabios.services.impl.ServicePersonImpl;
 
 public class ViewStudent extends ViewMain{
+
+private static final ServiceAddress serviceAddress = new ServiceAddressImpl(new RepositoryAddressMysqlImpl());
+    private static final ServiceCity serviceCity = new ServiceCityImpl(new RepositoryCityMysqlImpl());
+    private static final ServicePerson servicePerson = new ServicePersonImpl(new RepositoryPersonMysqlImpl());
 
     public static void startMenu() {
 
         int opc = 0;
 
         do {
+            clear();
             opc = showMenu();
             switch (opc) {
                 case 1:
@@ -23,22 +45,29 @@ public class ViewStudent extends ViewMain{
                 case 4:
                     deleteStudent();
                     break;
-                default:
+                case 5:
+                    listStudents();
                     break;
+                case 6:
+                    break;
+                default:
+                    System.out.println("Not Available Choice");
+                    sc.next();
             }
             
-        }while(opc>0 && opc<4);
+        }while(opc>0);
     }
 
     private static int showMenu() {
-        System.out.print("\033[H\033[2J");  
-        System.out.flush(); 
         System.out.println("*".repeat(10) + " Student's Menu " + "*".repeat(10));
         System.out.println("\t 1) Create a new Student");
         System.out.println("\t 2) Get Student by ID");
         System.out.println("\t 3) Edit Student");
         System.out.println("\t 4) Delete Student");
-        System.out.println("\t 5) Return to Main Menu");
+        System.out.println("\t 5) List Students");
+        System.out.println("\t 0) Return to Main Menu");
+        System.out.println("*".repeat(35));
+        System.out.print("Choose an Option: ");
         return sc.nextInt();
     } 
 
@@ -102,34 +131,154 @@ public class ViewStudent extends ViewMain{
             System.out.println("- Choose: ");
             gender = sc.nextInt();
         }while(gender < 1 || gender > 2);
-        int city = 0;
+         String gender_s = (gender == 1) ? "M" : "F";
+
+        List<City> cities = serviceCity.toList();
+        System.out.println("Cities List");
+        for (int i=0; i<cities.size(); i++) {
+            System.out.println("\t" + (i+1) + ") " + cities.get(i).getName());
+        }
+        int op_city = 0;
         do{
-            System.out.println("- City of Residence");
-            
-            city = sc.nextInt();
-        }while(city < 1 || city > 5);
-        System.out.println("- Address: ");
-        String address = sc.nextLine();
-        int program = 0;
+            System.out.print("\t Choose a City: ");
+            op_city = sc.nextInt();
+        }while(op_city < 1 || op_city > cities.size());
+        int city = cities.get(op_city-1).getId();
+        List<Address> addresses = serviceAddress.list();
+        System.out.println("Address List");
+        int op_address = 0;
+        for (int i=0; i<addresses.size(); i++) {
+            System.out.println("\t" + (i+1) + ") " + addresses.get(i).getAddress());
+        }
         do{
-            System.out.println("- Program");
-            
-            program = sc.nextInt();
-        }while(program < 1 || program > 5);
-        //Student student = new Student(typeId, id, name, lastName, phone, date, gender, city, address, program);
-        //serviceStudent.create(student);
+            System.out.print("\t Choose an Address: ");
+            op_address = sc.nextInt();
+        }while(op_address < 1 || op_address > addresses.size());
+        int address = addresses.get(op_address-1).getId();
+        List<Program> programs = serviceProgram.list();
+        int op_program = 0;
+        System.out.println("Program List");
+        for (int i=0; i<programs.size(); i++) {
+            System.out.println("\t" + (i+1) + ") " + programs.get(i).getName());
+        }
+        do{
+            System.out.print("\t Choose a Program: ");
+            op_program = sc.nextInt();
+        }while(op_program < 1 || op_program > programs.size());
+        int program = programs.get(op_program-1).getId();
+        Person person = new Person(typeId, id, name, lastName, phone, date, gender_s, city, address);
+        try {
+            serviceStudent.create(person, program);
+            System.out.println(person.getId());
+            System.out.println("Student created successfully!");
+        } catch (PersonExceptionInsertDataBase e) {
+            e.printStackTrace();
+        }
+        sc.next();
     }
 
     private static void getStudent() {
-        
+         System.out.println("Searching a Student...");
+        sc.nextLine();
+        System.out.print("\t Student's Document: ");
+        String document = sc.nextLine();
+        try {
+            Person student = serviceStudent.findByDocument(document);
+            System.out.println();
+            student.print();
+        } catch (PersonNullException e) {
+            //System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        sc.next();
     }
 
     private static void modifyStudent() {
-        
+        sc.nextLine();
+        System.out.println("Editing a Student...");
+        System.out.print("\t Student's Document: ");
+        String document = sc.nextLine();
+        try {
+            Person student = serviceStudent.findByDocument(document);
+
+            System.out.println("Editing Student: ");
+            System.out.print("Name: ");
+            String newName = sc.nextLine();
+            student.setName((newName.length() > 0) ? newName : student.getName());
+            System.out.print("Last Name: ");
+            String newLastName = sc.nextLine();
+            student.setLastName((newLastName.length() > 0) ? newLastName : student.getLastName());
+            System.out.print("Phone: ");
+            String newPhone = sc.nextLine();
+            student.setPhoneNumber((newPhone.length() > 0) ? newPhone : student.getPhoneNumber());
+            List<Address> addresses = serviceAddress.list();
+            System.out.println("Address List");
+            int op_address = 0;
+            for (int i=0; i<addresses.size(); i++) {
+                System.out.println("\t" + (i+1) + ") " + addresses.get(i).getAddress());
+            }
+            do{
+                System.out.print("\t Choose an Address: ");
+                op_address = sc.nextInt();
+            }while(op_address < 1 || op_address > addresses.size());
+            int address = addresses.get(op_address-1).getId();
+            student.setAddressId(address);
+            List<City> cities = serviceCity.toList();
+            System.out.println("Cities List");
+            for (int i=0; i<cities.size(); i++) {
+                System.out.println("\t" + (i+1) + ") " + cities.get(i).getName());
+            }
+            int op_city = 0;
+            do{
+                System.out.print("\t Choose a City: ");
+                op_city = sc.nextInt();
+            }while(op_city < 1 || op_city > cities.size());
+            int city = cities.get(op_city-1).getId();
+            student.setCityResidence(city);
+
+            student.print();
+
+            servicePerson.update(student);
+            List<Program> programs = serviceProgram.list();
+            int op_program = 0;
+            System.out.println("Program List");
+            for (int i=0; i<programs.size(); i++) {
+                System.out.println("\t" + (i+1) + ") " + programs.get(i).getName());
+            }
+            do{
+                System.out.print("\t Choose a Program: ");
+                op_program = sc.nextInt();
+            }while(op_program < 1 || op_program > programs.size());
+            int program = programs.get(op_program-1).getId();
+            serviceStudent.update(new Student(program, student.getId()));
+
+        }catch (PersonNullException e) {
+            //System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private static void deleteStudent() {
+        System.out.println("Deleting a Student...");
+        sc.nextLine();
+        System.out.print("\t Student's Document: ");
+        String document = sc.nextLine();
+        try {
+            serviceStudent.delete(document);
+            System.out.println("Student deleted successfully!");
+        } catch (PersonNullException e) {
+            //System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
       
+    }
+
+    private static void listStudents() {
+        System.out.println("Students List");
+        for (Person student : serviceStudent.list()) {
+            student.print();
+        }
+        sc.next();
     }
     
 }

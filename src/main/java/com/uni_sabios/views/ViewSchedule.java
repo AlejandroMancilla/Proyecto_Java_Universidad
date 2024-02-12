@@ -36,6 +36,8 @@ public class ViewSchedule extends ViewMain{
         System.out.println("\t 2) Get Schedule by ID");
         System.out.println("\t 3) Edit Schedule");
         System.out.println("\t 0) Return to Main Menu");
+        System.out.println("*".repeat(35));
+        System.out.print("Choose an Option: ");
         return sc.nextInt();
     } 
 

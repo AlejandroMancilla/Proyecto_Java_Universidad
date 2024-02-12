@@ -2,9 +2,7 @@ package com.uni_sabios.services;
 
 import java.util.List;
 
-import com.uni_sabios.exceptions.personexceptions.PersonNullException;
 import com.uni_sabios.exceptions.subjectexceptions.SubjectNullException;
-import com.uni_sabios.repository.models.Person;
 import com.uni_sabios.repository.models.Subject;
 
 public interface ServiceSubject {

@@ -3,6 +3,7 @@ package com.uni_sabios.services.impl;
 import java.util.List;
 
 import com.uni_sabios.exceptions.personexceptions.PersonException;
+import com.uni_sabios.exceptions.personexceptions.PersonExceptionInsertDataBase;
 import com.uni_sabios.repository.RepositoryTeacher;
 import com.uni_sabios.repository.models.Person;
 import com.uni_sabios.repository.models.Teacher;
@@ -39,5 +40,10 @@ public class ServiceTeacherImpl implements ServiceTeacher{
 
     public void delete(String document){
         crudRepositoryTeacher.delete(document);
+    }
+
+    @Override
+    public void create(Person person, int departmentId) throws PersonExceptionInsertDataBase {
+        crudRepositoryTeacher.create(person, departmentId);
     }
 }

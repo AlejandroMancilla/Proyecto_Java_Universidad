@@ -52,7 +52,9 @@ public class ViewReports extends ViewMain{
         System.out.println("\t 3) University income per semester");
         System.out.println("\t 4) Display a student's timetable");
         System.out.println("\t 5) Number of Students by Program (Ordered)");
-        System.out.println("\t 6) Return to Main Menu");
+        System.out.println("\t 0) Return to Main Menu");
+        System.out.println("*".repeat(35));
+        System.out.print("Choose an Option: ");
         return sc.nextInt();
     }
 

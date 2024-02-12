@@ -41,7 +41,8 @@ public class ViewDepartment extends ViewMain {
         System.out.println("\t 2) Get Department by ID");
         System.out.println("\t 3) Edit Department");
         System.out.println("\t 4) Delete Department");
-        System.out.println("\t 5) Return to Main Menu");
+        System.out.println("\t 5) List Departments");
+        System.out.println("\t 6) Return to Main Menu");
         return sc.nextInt();
     } 
 
@@ -79,6 +80,7 @@ public class ViewDepartment extends ViewMain {
         } catch (DepartmentNullException e) {
             System.out.println(e.getMessage());
         }
+        sc.next();
     }
 
     private static void modifyDepartment() {
@@ -90,15 +92,17 @@ public class ViewDepartment extends ViewMain {
                 System.out.println(" 1) Name");
                 System.out.println(" 2) Save & Exit");
                 opc = sc.nextInt();
+                sc.nextLine();
                 if(opc == 1){
-                    System.out.print("\t Department's Name: ");
+                    System.out.print("\t New Department's Name: ");
                     String name = sc.nextLine();
                     department.setName(name);
                 }
-                String name = sc.nextLine();
             }while(opc < 1 || opc >= 2);
+            serviceDepartment.modify(department);
             System.out.println("Modified");
-        }        
+        }
+        sc.next();     
     }
 
     private static void deleteDepartment() {

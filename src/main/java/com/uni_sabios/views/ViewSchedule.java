@@ -24,7 +24,8 @@ public class ViewSchedule extends ViewMain{
                 case 0:
                     break;
                 default:
-                    break;
+                    System.out.println("Not Available Choice");
+                    sc.next();
             }
         }while(opc>0 && opc<5);
     }

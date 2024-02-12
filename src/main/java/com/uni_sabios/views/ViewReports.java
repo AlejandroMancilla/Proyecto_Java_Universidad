@@ -6,30 +6,35 @@ public class ViewReports extends ViewMain{
         int opc = 0;
 
         do {
+            clear();
             opc = showMenu();
             switch (opc) {
                 case 1:
-                    createReport();
+                    studentByCourse();
                     break;
                 case 2:
-                    getReport();
+                    calculateCostSemester();
                     break;
                 case 3:
-                    modifyReport();
+                    incomePerSemester();
                     break;
                 case 4:
-                    deleteReport();
+                    studentSchedule();
+                    break;
+                case 5:
+                    orderProgramsByStudents();
+                    break;
+                case 0:
                     break;
                 default:
-                    break;
+                    System.out.println("Not Available Choice");
+                    sc.next();
             }
             
-        }while(opc>0 && opc<4);
+        }while(opc>0);
     }
 
     private static int showMenu() {
-        System.out.print("\033[H\033[2J");  
-        System.out.flush(); 
         System.out.println("*".repeat(10) + " Student's Menu " + "*".repeat(10));
         System.out.println("\t 1) Students by Course");
         System.out.println("\t 2) Cost of a Student's semester");
@@ -40,21 +45,24 @@ public class ViewReports extends ViewMain{
         return sc.nextInt();
     }
 
-    private static void createReport(){
-        
-        //serviceReport.create(Report);
+    private static void studentByCourse(){
+
     }
 
-    private static void getReport() {
-        
-    }
-
-    private static void modifyReport() {
+    private static void calculateCostSemester() {
         
     }
 
-    private static void deleteReport() {
+    private static void incomePerSemester() {
+        
+    }
+
+    private static void studentSchedule() {
       
+    }
+
+    private static void orderProgramsByStudents() {
+
     }
     
 }

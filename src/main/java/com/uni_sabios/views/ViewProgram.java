@@ -54,7 +54,7 @@ public class ViewProgram extends ViewMain{
             System.out.println("\t Program's level");
             System.out.println("\t  1) Pre-Graduate");
             System.out.println("\t  2) Post-Graduate");
-            System.out.print("\t Choose(1/2)");
+            System.out.print("\t Choose(1/2): ");
             opc = sc.nextInt();
         }while(opc < 0 || opc > 2);
         String level = "";
@@ -66,7 +66,6 @@ public class ViewProgram extends ViewMain{
     }
 
     private static Program getProgram() {
-        System.out.println("Searching a Program...");
         sc.nextLine();
         System.out.print("\t Program's ID: ");
         int id = sc.nextInt();
@@ -93,7 +92,37 @@ public class ViewProgram extends ViewMain{
     }
 
     private static void modifyProgram() {
-        
+        System.out.println("Modifying a Program...");
+        Program program = getProgram();
+        if(program != null) {
+            int opc = 0;
+            System.out.println(" 1) Name");
+            System.out.println(" 2) Level");
+            opc = sc.nextInt();
+            sc.nextLine();
+            if(opc == 1){
+                System.out.print("\t New Program's Name: ");
+                String name = sc.nextLine();
+                program.setName(name);
+            }else if(opc == 2){
+                do {
+                    System.out.println("\t Program's level");
+                    System.out.println("\t  1) Pre-Graduate");
+                    System.out.println("\t  2) Post-Graduate");
+                    System.out.print("\t Choose(1/2): ");
+                    opc = sc.nextInt();
+                }while(opc < 0 || opc > 2);
+                String level = "";
+                if(opc == 1) level = "Pre-Graduate";
+                else level = "Post-Graduate";
+                program.setLevel(level);
+            }else{
+                System.out.println("Incorrect Choose");
+            }
+            serviceProgram.modify(program);
+            System.out.println("Program Modified");
+        }
+        sc.next(); 
     }
 
     private static void deleteProgram() {

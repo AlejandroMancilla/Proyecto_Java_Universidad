@@ -2,7 +2,6 @@ package com.uni_sabios.views;
 
 import com.uni_sabios.exceptions.departmentexceptions.DepartmentNullException;
 import com.uni_sabios.repository.models.Department;
-import com.uni_sabios.repository.models.Program;
 
 public class ViewDepartment extends ViewMain {
 

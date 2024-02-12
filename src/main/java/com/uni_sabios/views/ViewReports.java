@@ -1,8 +1,12 @@
 package com.uni_sabios.views;
 
+import java.sql.SQLException;
+
+import com.uni_sabios.repository.models.Person;
+
 public class ViewReports extends ViewMain{
 
-    public static void startMenu() {
+    public static void startMenu() throws SQLException {
         int opc = 0;
 
         do {
@@ -10,7 +14,7 @@ public class ViewReports extends ViewMain{
             opc = showMenu();
             switch (opc) {
                 case 1:
-                    studentByCourse();
+                    studentByProgram();
                     break;
                 case 2:
                     calculateCostSemester();
@@ -36,7 +40,7 @@ public class ViewReports extends ViewMain{
 
     private static int showMenu() {
         System.out.println("*".repeat(10) + " Student's Menu " + "*".repeat(10));
-        System.out.println("\t 1) Students by Course");
+        System.out.println("\t 1) Students by Program");
         System.out.println("\t 2) Cost of a Student's semester");
         System.out.println("\t 3) University income per semester");
         System.out.println("\t 4) Display a student's timetable");
@@ -45,8 +49,14 @@ public class ViewReports extends ViewMain{
         return sc.nextInt();
     }
 
-    private static void studentByCourse(){
-
+    private static void studentByProgram() throws SQLException{
+        System.out.println("Students per Program...");
+        System.out.println("Program ID: ");
+        int programId = sc.nextInt();
+        for(Person person : serviceReport.getStudentbyProgram(programId)){
+            person.print();
+            System.out.println();
+        }
     }
 
     private static void calculateCostSemester() {
@@ -58,7 +68,7 @@ public class ViewReports extends ViewMain{
     }
 
     private static void studentSchedule() {
-      
+        
     }
 
     private static void orderProgramsByStudents() {

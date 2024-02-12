@@ -45,6 +45,21 @@ public class RepositoryPersonMysqlImpl implements RepositoryPerson {
         return listPersons;
     }
 
+    public List<Person> listStudentsByProgram(int program) throws SQLException {
+        List<Person> listPersons = new ArrayList<>();
+        try (PreparedStatement pstmt = getConnection().prepareStatement("SELECT * FROM persons p INNER JOIN students s ON p.person_id = s.person_id WHERE s.program_id = ?");) {
+                pstmt.setInt(1, program);
+                try(ResultSet rs = pstmt.executeQuery();) {
+                    while (rs.next()) {
+                        listPersons.add(createPerson(rs));
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        return listPersons;
+        }
+    }
+
     public List<Person> listTeachers() {
         List<Person> listPersons = new ArrayList<>();
         try (Statement stmt = getConnection().createStatement();

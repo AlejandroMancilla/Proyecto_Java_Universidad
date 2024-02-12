@@ -12,7 +12,7 @@ import com.uni_sabios.repository.RepositoryBuilding;
 import com.uni_sabios.repository.models.Building;
 import com.uni_sabios.utils.conexiondb.conexionbdmysql.ConexionBDMysql;
 
-public class RepositoryBuildingMysqlImpl implements RepositoryBuilding{
+public class RepositoryBuildingMysqlImpl implements RepositoryBuilding {
 
     private Connection getConnection() throws SQLException {
         return ConexionBDMysql.getInstance();

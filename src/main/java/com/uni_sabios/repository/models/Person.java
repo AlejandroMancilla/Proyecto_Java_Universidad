@@ -37,6 +37,11 @@ public class Person {
         return this.name + " " + this.lastName;
     }
 
+    public void print() {
+        System.out.println(this.typeId + " " + this.numId + " " + this.name + " " + this.lastName + " " + this.phoneNumber
+                + " " + this.dateBirth + " " + this.gender + " " + this.cityResidence + " " + this.addressId);
+    }
+
 }
 
 

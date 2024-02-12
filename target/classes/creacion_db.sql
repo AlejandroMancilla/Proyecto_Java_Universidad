@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS departments (
 
 CREATE TABLE IF NOT EXISTS persons (
 	person_id int NOT NULL AUTO_INCREMENT,
-	document_type ENUM("C.C", "T.I") NOT NULL,
+	document_type ENUM("C.C.", "T.I.", "Passport", "C.E.") NOT NULL,
 	document_numb VARCHAR(10) NOT NULL UNIQUE,	
 	name VARCHAR(30) NOT NULL,
 	last_name VARCHAR(30) NOT NULL,

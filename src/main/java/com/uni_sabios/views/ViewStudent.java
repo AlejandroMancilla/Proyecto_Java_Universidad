@@ -42,11 +42,9 @@ public class ViewStudent extends ViewMain{
         return sc.nextInt();
     } 
 
-    private static void createStudent() {
-        sc.nextLine();
-        System.out.println("*".repeat(40));
-        System.out.println("Create a new Student");
-        int typeId = 0;
+    private static String showTypes() {
+        int opc = 0;
+        String TypeId = "";
         do{
             System.out.println("- ID Type");
             System.out.println("\t- 1) CC");
@@ -54,8 +52,32 @@ public class ViewStudent extends ViewMain{
             System.out.println("\t- 3) Passport");
             System.out.println("\t- 4) CE");
             System.out.println("- Choose: ");
-            typeId = sc.nextInt();
-        }while(typeId < 1 || typeId > 4);
+            opc = sc.nextInt();
+        }while(opc < 1 || opc > 4);
+        switch (opc) {
+            case 1:
+                TypeId = "C.C.";
+                break;
+            case 2: 
+                TypeId = "T.I.";
+                break;
+            case 3:
+                TypeId = "Passport";
+                break;
+            case 4:
+                TypeId = "C.E.";
+                break;
+            default:
+                break;
+        }
+        return TypeId;
+    }
+
+    private static void createStudent() {
+        sc.nextLine();
+        System.out.println("*".repeat(40));
+        System.out.println("Create a new Student");
+        String typeId = showTypes();
         System.out.print("- Id Number: ");
         String id = sc.nextLine();
         System.out.print("- Name: ");
@@ -65,13 +87,13 @@ public class ViewStudent extends ViewMain{
         System.out.println("- Phone Number: ");
         String phone = sc.nextLine();
         System.out.println("- Date of Birth");
-        System.out.println("\t- Age: ");
-        int age = sc.nextInt();
+        System.out.println("\t- Year: ");
+        int year = sc.nextInt();
         System.out.println("\t- Month: ");
         int month = sc.nextInt();
         System.out.println("\t- Day: "); 
         int day = sc.nextInt();
-        String date = age + "-" + month + "-" + day;
+        String date = year + "-" + month + "-" + day;
         int gender = 0;
         do{
             System.out.println("- Gender");

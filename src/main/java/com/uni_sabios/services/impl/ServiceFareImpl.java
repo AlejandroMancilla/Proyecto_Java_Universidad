@@ -39,5 +39,15 @@ public class ServiceFareImpl implements ServiceFare{
     public void modify(Fare fare) {
         this.crudRepositoryFare.modify(fare);
     }
+
+    @Override
+    public int getFarebyPeriodSubject(String document, int period) throws FareNullException {
+        int fare = this.crudRepositoryFare.getFarebyPeriodSubject(document, period);
+        if(fare != 0) {
+            return fare;
+        }else {
+            throw new FareNullException("No Fare with this ID was found");
+        }
+    }
     
 }

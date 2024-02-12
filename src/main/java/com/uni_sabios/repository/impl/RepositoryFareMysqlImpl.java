@@ -87,4 +87,21 @@ public class RepositoryFareMysqlImpl implements RepositoryFare {
     private Fare createFare(ResultSet rs) throws SQLException {
         return new Fare(rs.getInt("tuition_id"), rs.getInt("credit_cost"), rs.getInt("program_id"), rs.getInt("period_id"));
     }
+
+    @Override
+    public int getFarebyPeriodSubject(String document, int period) {
+        int fare = 0;
+        try (PreparedStatement stmt = getConnection().prepareStatement("SELECT * FROM tuitions t INNER JOIN programs p ON t.program_id = p.program_id INNER JOIN students s ON s.program_id = p.program_id INNER JOIN persons pe ON pe.person_id = s.person_id WHERE t.period_id = ? AND pe.document_numb = ?" );) {
+            stmt.setInt(1, period);
+            stmt.setString(2, document);
+            try (ResultSet rs = stmt.executeQuery();) {
+                if (rs.next()) {
+                    fare = rs.getInt("credit_cost");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return fare;
+    }
 }

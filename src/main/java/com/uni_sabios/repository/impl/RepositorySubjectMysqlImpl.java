@@ -92,7 +92,7 @@ public class RepositorySubjectMysqlImpl implements RepositorySubject {
     }
 
     private Subject createSubject(ResultSet rs) throws SQLException {
-        return new Subject(rs.getInt("signatire_id"), rs.getInt("credits"), rs.getInt("capacity"), rs.getInt("duration"), rs.getString("name"), rs.getInt("teacher_id"), rs.getInt("course_id"), rs.getInt("period_id"));
+        return new Subject(rs.getInt("signature_id"), rs.getInt("credits"), rs.getInt("capacity"), rs.getInt("duration"), rs.getString("name"), rs.getInt("teacher_id"), rs.getInt("course_id"), rs.getInt("period_id"));
     }
     
 }

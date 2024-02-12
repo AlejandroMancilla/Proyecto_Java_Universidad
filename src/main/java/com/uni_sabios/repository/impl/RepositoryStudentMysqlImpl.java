@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.uni_sabios.exceptions.personexceptions.PersonExceptionInsertDataBase;
 import com.uni_sabios.repository.RepositoryStudent;
 import com.uni_sabios.repository.models.Person;
 import com.uni_sabios.repository.models.Student;
@@ -19,13 +20,13 @@ public class RepositoryStudentMysqlImpl implements RepositoryStudent{
     }
 
     @Override
-    public List<Person> list() {
+    public List<Person> toList() {
         RepositoryPersonMysqlImpl repositoryPersonMysqlImpl = new RepositoryPersonMysqlImpl();
         return repositoryPersonMysqlImpl.listStudents();
     }
 
     @Override
-    public Person getPerson(String document) {
+    public Person findByDocument(String document) {
         RepositoryPersonMysqlImpl repositoryPersonMysqlImpl = new RepositoryPersonMysqlImpl();
         return repositoryPersonMysqlImpl.getPerson(document);
     }
@@ -44,7 +45,7 @@ public class RepositoryStudentMysqlImpl implements RepositoryStudent{
         }
     }
 
-    public void create(Person person, int programId) {
+    public void create(Person person, int programId) throws PersonExceptionInsertDataBase{
 
         RepositoryPersonMysqlImpl repositoryPersonMysqlImpl = new RepositoryPersonMysqlImpl();
         repositoryPersonMysqlImpl.create(person);
@@ -84,8 +85,9 @@ public class RepositoryStudentMysqlImpl implements RepositoryStudent{
         }
     }
 
-    public void delete(int personId) {
+    public void delete(String document) {
         RepositoryPersonMysqlImpl repositoryPersonMysqlImpl = new RepositoryPersonMysqlImpl();
+        int personId = repositoryPersonMysqlImpl.getPerson(document).getId();
         String sql = "DELETE FROM students WHERE person_id = ?";
 
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)){
@@ -96,5 +98,6 @@ public class RepositoryStudentMysqlImpl implements RepositoryStudent{
             e.printStackTrace();
         }
     }
+
 
 }

@@ -10,6 +10,8 @@ public interface RepositoryFare {
 
     Fare getFare(int fareId);
 
+    int getFarebyPeriodSubject(String document, int period);
+
     void create(Fare fare);
 
     void modify(Fare fare);

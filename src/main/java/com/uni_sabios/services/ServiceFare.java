@@ -11,6 +11,8 @@ public interface ServiceFare {
 
     Fare getFare(int fareId) throws FareNullException;
 
+    int getFarebyPeriodSubject(String document, int period) throws FareNullException;
+
     void create(Fare fare);
 
     void modify(Fare fare);

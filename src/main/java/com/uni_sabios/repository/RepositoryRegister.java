@@ -8,6 +8,8 @@ public interface RepositoryRegister {
     
     List<Register> list();
 
+    List<Register> listByStudentId(String document, int period);
+
     Register getRegister(int registerId);
 
     void create(Register register);

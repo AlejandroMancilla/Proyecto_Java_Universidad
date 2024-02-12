@@ -146,6 +146,8 @@ public class RepositoryPersonMysqlImpl implements RepositoryPerson {
         person.setNumId(rs.getString("document_numb"));
         person.setName(rs.getString("name"));
         person.setLastName(rs.getString("last_name"));
+        person.setPhoneNumber(rs.getString("phone_number"));
+        person.setDateBirth(rs.getString("date_birth"));
         person.setAddressId(rs.getInt("address_id"));
         person.setCityResidence(rs.getInt("city_id"));
 

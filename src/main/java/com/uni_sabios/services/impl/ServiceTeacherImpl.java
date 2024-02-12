@@ -37,7 +37,7 @@ public class ServiceTeacherImpl implements ServiceTeacher{
         crudRepositoryTeacher.modify(teacher);
     }
 
-    public void delete(Teacher teacher){
-        crudRepositoryTeacher.delete(teacher);
+    public void delete(String document){
+        crudRepositoryTeacher.delete(document);
     }
 }

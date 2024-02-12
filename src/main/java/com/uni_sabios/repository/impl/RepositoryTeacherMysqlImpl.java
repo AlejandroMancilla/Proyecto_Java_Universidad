@@ -71,8 +71,25 @@ public class RepositoryTeacherMysqlImpl implements RepositoryTeacher {
 
     }
 
-    @Override
     public void delete(Teacher teacher){
-        System.out.println("Deleting teacher");
+        RepositoryPersonMysqlImpl repositoryPersonMysqlImpl = new RepositoryPersonMysqlImpl();
+        String sql = "DELETE FROM teachers WHERE person_id = ?";
+
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)){
+            stmt.setInt(1, teacher.getPersonId());
+            stmt.executeUpdate();
+            repositoryPersonMysqlImpl.delete(teacher.getPersonId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delete(String document){
+        System.out.println("Deleting teacher...");
+        RepositoryPersonMysqlImpl repositoryPersonMysqlImpl = new RepositoryPersonMysqlImpl();
+        Person person = repositoryPersonMysqlImpl.getPerson(document);
+        Teacher teacher = new Teacher(person.getId(), 0);
+        delete(teacher);
     }
 }

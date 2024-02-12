@@ -15,6 +15,6 @@ public interface RepositoryTeacher {
 
     void modify(Teacher teacher);
 
-    void delete(Teacher teacher);
+    void delete(String document);
     
 }

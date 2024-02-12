@@ -2,7 +2,8 @@ package com.uni_sabios.services.impl;
 
 import java.util.List;
 
-import com.uni_sabios.exceptions.personexceptions.PersonException;
+import com.uni_sabios.exceptions.personexceptions.PersonExceptionInsertDataBase;
+import com.uni_sabios.exceptions.personexceptions.PersonNullException;
 import com.uni_sabios.repository.RepositoryStudent;
 import com.uni_sabios.repository.models.Person;
 import com.uni_sabios.repository.models.Student;
@@ -19,28 +20,46 @@ public class ServiceStudentImpl implements ServiceStudent{
     }
     
     public List<Person> list(){
-        return crudRepositoryStudent.list();
+        return crudRepositoryStudent.toList();
     }
     
-    public Person getPerson(String document) throws PersonException {
-        Person person = crudRepositoryStudent.getPerson(document);
+    public Person findByDocument(String document) throws PersonNullException {
+        Person person = crudRepositoryStudent.findByDocument(document);
         if(person == null){
-            throw new PersonException("Person not found");
+            throw new PersonNullException("Person not found");
         } else {
             return person;
         }
+    }
+
+    public int getId(String document) throws PersonNullException {
+        Person person = crudRepositoryStudent.findByDocument(document);
+        if(person == null){
+            throw new PersonNullException("Person not found");
+        } else {
+            return person.getId();
+        }
+
     }
 
     public void create(Student student) {
         crudRepositoryStudent.create(student);
     }
 
-    public void modify(Student student) {
+    public void create(Person person, int idProgram) throws PersonExceptionInsertDataBase{
+        crudRepositoryStudent.create(person, idProgram);
+    }
+
+    public void update(Student student) {
         crudRepositoryStudent.modify(student);
     }
 
-    public void delete(Student student) {
+    public void delete(Student student) throws PersonNullException {
         crudRepositoryStudent.delete(student);
     }
 
+    public void delete(String document) throws PersonNullException {
+        crudRepositoryStudent.delete(document);
+    }
 }
+ 

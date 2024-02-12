@@ -16,12 +16,12 @@ public class Person {
     private String lastName;
     private String phoneNumber;
     private String dateBirth;
-    private int gender;
+    private String gender;
     private int cityResidence;
     private int addressId;
 
     public Person(String typeId, String numId, String name, String lastName, String phoneNumber, String dateBirth,
-            int gender, int cityResidence, int address) {
+            String gender, int cityResidence, int address) {
         this.typeId = typeId;
         this.numId = numId;
         this.name = name;

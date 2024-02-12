@@ -32,7 +32,7 @@ public class RepositoryScheduleMysqlImpl implements RepositorySchedule {
         return listSchedules;
     }
 
-    @Override
+        @Override
     public Schedule getSchedule(int scheduleId) {
         Schedule schedule = null;
         try (PreparedStatement pstmt = getConnection().prepareStatement("SELECT * FROM schedules WHERE schedule_id = ?");) {

@@ -2,18 +2,25 @@ package com.uni_sabios.services;
 
 import java.util.List;
 
-import com.uni_sabios.exceptions.personexceptions.PersonException;
+import com.uni_sabios.exceptions.personexceptions.PersonExceptionInsertDataBase;
+import com.uni_sabios.exceptions.personexceptions.PersonNullException;
 import com.uni_sabios.repository.models.Person;
 import com.uni_sabios.repository.models.Student;
 
 public interface ServiceStudent {
-    List<Person> list();
-
-    Person getPerson(String id) throws PersonException;
+    
+    List<Person> list();  
+    
+    Person findByDocument(String document) throws PersonNullException;
 
     void create(Student student);
 
-    void modify(Student student);
+    void create(Person person, int idProgram) throws PersonExceptionInsertDataBase;
 
-    void delete(Student student);
+    void update(Student student);
+
+    void delete(Student student) throws PersonNullException;
+
+    void delete(String document) throws PersonNullException;
+
 }

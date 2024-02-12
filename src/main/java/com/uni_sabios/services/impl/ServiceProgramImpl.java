@@ -26,7 +26,7 @@ public class ServiceProgramImpl implements ServiceProgram{
         if(program != null){
             return program;
         }else{
-            throw new ProgramNullException("No program found with this id was found");
+            throw new ProgramNullException("No Program with this id was found");
         }
     }
 

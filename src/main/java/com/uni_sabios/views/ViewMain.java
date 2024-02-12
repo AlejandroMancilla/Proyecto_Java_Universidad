@@ -10,11 +10,13 @@ import com.uni_sabios.repository.impl.RepositoryProgramMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryStudentMysqlImpl;
 import com.uni_sabios.repository.impl.RepositorySubjectMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryTeacherMysqlImpl;
+import com.uni_sabios.repository.impl.implregisters.RepositoryRegisterMysqlImpl;
 import com.uni_sabios.services.ServiceClassroom;
 import com.uni_sabios.services.ServiceCourse;
 import com.uni_sabios.services.ServiceDepartment;
 import com.uni_sabios.services.ServiceFare;
 import com.uni_sabios.services.ServiceProgram;
+import com.uni_sabios.services.ServiceRegister;
 import com.uni_sabios.services.ServiceStudent;
 import com.uni_sabios.services.ServiceSubject;
 import com.uni_sabios.services.ServiceTeacher;
@@ -23,6 +25,7 @@ import com.uni_sabios.services.impl.ServiceCourseImpl;
 import com.uni_sabios.services.impl.ServiceDepartmentImpl;
 import com.uni_sabios.services.impl.ServiceFareImpl;
 import com.uni_sabios.services.impl.ServiceProgramImpl;
+import com.uni_sabios.services.impl.ServiceRegisterImpl;
 import com.uni_sabios.services.impl.ServiceStudentImpl;
 import com.uni_sabios.services.impl.ServiceSubjectImpl;
 import com.uni_sabios.services.impl.ServiceTeacherImpl;
@@ -34,6 +37,7 @@ public class ViewMain {
     public static final ServiceDepartment serviceDepartment = new ServiceDepartmentImpl(new RepositoryDepartmentMysqlImpl());
     public static final ServiceFare serviceFare = new ServiceFareImpl(new RepositoryFareMysqlImpl());
     public static final ServiceProgram serviceProgram = new ServiceProgramImpl(new RepositoryProgramMysqlImpl());
+    public static final ServiceRegister serviceRegister = new ServiceRegisterImpl(new RepositoryRegisterMysqlImpl());
     public static final ServiceStudent serviceStudent = new ServiceStudentImpl(new RepositoryStudentMysqlImpl());
     public static final ServiceSubject serviceSubject = new ServiceSubjectImpl(new RepositorySubjectMysqlImpl());
     public static final ServiceTeacher serviceTeacher = new ServiceTeacherImpl(new RepositoryTeacherMysqlImpl());
@@ -77,12 +81,18 @@ public class ViewMain {
                     ViewSchedule.startMenu();    
                     break;
                 case 11:
+                    ViewRegister.startMenu();
+                    break;
+                case 12:
                     ViewReports.startMenu();
                     break;
-                default:
+                case 0:
                     break;
+                default:
+                    System.out.println("Not Available Choice");
+                    sc.next();
             }
-        }while(opc>0 && opc<12);
+        }while(opc>0);
     }
 
     public static int mainMenu() {
@@ -98,7 +108,8 @@ public class ViewMain {
         System.out.println("\t 8) Departments Management");
         System.out.println("\t 9) Classroom Management");
         System.out.println("\t10) Schedules Management");
-        System.out.println("\t11) Reports");
+        System.out.println("\t11) Registers Management");
+        System.out.println("\t12) Reports");
         System.out.println("\t 0) Exit");
         System.out.println("*".repeat(47));
         System.out.print("Choose an Option: ");

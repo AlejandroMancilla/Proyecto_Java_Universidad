@@ -2,7 +2,7 @@ package com.uni_sabios.services.impl;
 
 import java.util.List;
 
-import com.uni_sabios.exceptions.studentexceptions.StudentNotFoundException;
+import com.uni_sabios.exceptions.studentexceptions.StudentNullException;
 import com.uni_sabios.repository.RepositoryStudent;
 import com.uni_sabios.repository.models.Student;
 import com.uni_sabios.services.ServiceStudent;
@@ -40,7 +40,7 @@ public class ServiceStudentImpl implements ServiceStudent{
     }
 
     @Override
-    public Student getStudent(String id) throws StudentNotFoundException {
+    public Student getStudent(String id) throws StudentNullException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getStudent'");
     }

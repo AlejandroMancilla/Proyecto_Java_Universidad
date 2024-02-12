@@ -4,14 +4,20 @@ import java.util.Scanner;
 
 import com.uni_sabios.repository.impl.RepositoryClassroomMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryCourseMysqlImpl;
+import com.uni_sabios.repository.impl.RepositoryDepartmentMysqlImpl;
+import com.uni_sabios.repository.impl.RepositoryProgramMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryStudentMysqlImpl;
 import com.uni_sabios.repository.impl.RepositoryTeacherMysqlImpl;
 import com.uni_sabios.services.ServiceClassroom;
 import com.uni_sabios.services.ServiceCourse;
+import com.uni_sabios.services.ServiceDepartment;
+import com.uni_sabios.services.ServiceProgram;
 import com.uni_sabios.services.ServiceStudent;
 import com.uni_sabios.services.ServiceTeacher;
 import com.uni_sabios.services.impl.ServiceClassroomImpl;
 import com.uni_sabios.services.impl.ServiceCourseImpl;
+import com.uni_sabios.services.impl.ServiceDepartmentImpl;
+import com.uni_sabios.services.impl.ServiceProgramImpl;
 import com.uni_sabios.services.impl.ServiceStudentImpl;
 import com.uni_sabios.services.impl.ServiceTeacherImpl;
 
@@ -21,6 +27,8 @@ public class ViewMain {
     public static final ServiceCourse serviceCourse = new ServiceCourseImpl(new RepositoryCourseMysqlImpl());
     public static final ServiceStudent serviceStudent = new ServiceStudentImpl(new RepositoryStudentMysqlImpl());
     public static final ServiceTeacher serviceTeacher = new ServiceTeacherImpl(new RepositoryTeacherMysqlImpl());
+    public static final ServiceProgram serviceProgram = new ServiceProgramImpl(new RepositoryProgramMysqlImpl());
+    public static final ServiceDepartment serviceDepartment = new ServiceDepartmentImpl(new RepositoryDepartmentMysqlImpl());
     public static final Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
         
@@ -69,8 +77,7 @@ public class ViewMain {
     }
 
     public static int mainMenu() {
-        System.out.print("\033[H\033[2J");  
-        System.out.flush(); 
+        clear();
         System.out.println("*".repeat(10) + " SABIO'S UNIVERSITY SYSTEM " + "*".repeat(10));
         System.out.println("\t 1) Students Management");
         System.out.println("\t 2) Teachers Management");
@@ -87,5 +94,10 @@ public class ViewMain {
         System.out.println("*".repeat(47));
         System.out.print("Choose an Option: ");
         return sc.nextInt();
+    }
+
+    public static void clear() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

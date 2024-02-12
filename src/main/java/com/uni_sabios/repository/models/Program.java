@@ -18,4 +18,14 @@ public class Program {
         this.name = name;
         this.level = level;
     }
+
+    public void print() {
+        System.out.println("-".repeat(30));
+        System.out.println("\t    ID: " + getId());
+        System.out.println("\t  Name: " + getName());
+        System.out.println("\t Level: " + getLevel());
+        System.out.println("-".repeat(30));
+    }
+
+    
 }

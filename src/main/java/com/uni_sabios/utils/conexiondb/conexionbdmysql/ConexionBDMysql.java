@@ -1,7 +1,6 @@
 package com.uni_sabios.utils.conexiondb.conexionbdmysql;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.uni_sabios.utils.Configuration;
@@ -15,7 +14,7 @@ public class ConexionBDMysql {
     
     public static Connection getInstance() throws SQLException {
         if(connection == null) {
-            connection = DriverManager.getConnection(url, username, password);
+            connection = java.sql.DriverManager.getConnection(url, username, password);
         }
         return connection;
     }

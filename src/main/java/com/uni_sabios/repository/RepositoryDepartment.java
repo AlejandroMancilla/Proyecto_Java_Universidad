@@ -1,18 +1,18 @@
-package com.uni_sabios.services;
+package com.uni_sabios.repository;
 
 import java.util.List;
 
-import com.uni_sabios.exceptions.departmentexceptions.DepartmentNullException;
 import com.uni_sabios.repository.models.Department;
 
-public interface ServiceDepartment {
+public interface RepositoryDepartment {
     List<Department> list();
 
-    Department getDepartment(int departmentId) throws DepartmentNullException;
+    Department getDepartment(int departmentId);
 
     void create(Department department);
 
     void modify(Department department);
 
     void delete(Department department);
+
 }

@@ -65,16 +65,6 @@ public class RepositoryProgramMysqlImpl implements RepositoryProgram{
 
     @Override
     public void modify(Program program) {
-        try (PreparedStatement pstmt = getConnection().prepareStatement("DELETE FROM programs WHERE program_id = ?");) {
-            pstmt.setInt(1, program_id);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void delete(Program program) {
         try (PreparedStatement pstmt = getConnection().prepareStatement("UPDATE programs SET program_name = ?, program_level = ? WHERE program_id = ?");) {
             pstmt.setString(1, program.getName());
             pstmt.setString(2, program.getLevel());
@@ -84,4 +74,15 @@ public class RepositoryProgramMysqlImpl implements RepositoryProgram{
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void delete(Program program) {
+        try (PreparedStatement pstmt = getConnection().prepareStatement("DELETE FROM programs WHERE program_id = ?");) {
+            pstmt.setInt(1, program.getId());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -21,8 +21,8 @@ public class ServiceProgramImpl implements ServiceProgram{
     }
 
     @Override
-    public Program getProgram(String code) throws ProgramNullException {
-        Program program = this.crudRepositoryProgram.getProgram(code);
+    public Program getProgram(int programId) throws ProgramNullException {
+        Program program = this.crudRepositoryProgram.getProgram(programId);
         if(program != null){
             return program;
         }else{

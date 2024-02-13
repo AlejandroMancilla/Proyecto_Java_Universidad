@@ -69,6 +69,22 @@ public class RepositoryRegisterMysqlImpl implements RepositoryRegister{
     }
 
     @Override
+    public int listByPeriod(int periodId) {
+        int income = 0;
+        try (PreparedStatement pstmt = getConnection().prepareStatement("SELECT si.credits, t.credit_cost FROM registers r INNER JOIN students s ON r.student_id = s.student_id INNER JOIN signatures si ON si.signature_id = r.signature_id INNER JOIN tuitions t ON (t.period_id = r.period_id) AND (t.program_id = s.program_id) WHERE r.period_id = ?");) {
+            pstmt.setInt(1, periodId);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                while (rs.next()) {
+                    income+= rs.getInt("credits") * rs.getInt("credit_cost");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return income;
+    }
+
+    @Override
     public void create(Register register) {
 
         try (PreparedStatement pstmt = getConnection().prepareStatement("INSERT INTO registers (student_id, period_id, signature_id) VALUES (?, ?, ?)");) {
@@ -101,4 +117,5 @@ public class RepositoryRegisterMysqlImpl implements RepositoryRegister{
         return new Register(rs.getInt("register_id"), rs.getInt("student_id"), rs.getInt("period_id"), rs.getInt("signature_id"));
     }
 
+    
 }

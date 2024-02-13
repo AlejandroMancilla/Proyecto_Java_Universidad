@@ -1,11 +1,14 @@
 package com.uni_sabios.views;
 
+import com.uni_sabios.exceptions.periodexceptions.PeriodNullException;
+import com.uni_sabios.exceptions.personexceptions.PersonNullException;
 import com.uni_sabios.exceptions.registerexceptions.RegisterNullException;
+import com.uni_sabios.exceptions.subjectexceptions.SubjectNullException;
 import com.uni_sabios.repository.models.Register;
 
 public class ViewRegister extends ViewMain {
 
-    public static void startMenu() {
+    public static void startMenu() throws PersonNullException, SubjectNullException, PeriodNullException {
         int opc = 0;
 
         do {
@@ -59,7 +62,7 @@ public class ViewRegister extends ViewMain {
         }
     }
 
-    private static void printRegister() {
+    private static void printRegister() throws PersonNullException, SubjectNullException, PeriodNullException {
         System.out.println("Searching a Register...");
         sc.nextLine();
         System.out.print("\t Register's ID: ");
@@ -110,11 +113,13 @@ public class ViewRegister extends ViewMain {
         sc.next();
     }
 
-    private static void listRegisters() {
+    private static void listRegisters() throws PersonNullException, SubjectNullException, PeriodNullException {
+        clear();
         System.out.println("Register's List");
+        System.out.printf("|%-6s|%-30s|%-8s|%-40s|\n", "ID", "STUDENT", "PERIOD", "SUBJECT");
+        System.out.println("+" + "-".repeat(6) + "+" + "-".repeat(30) + "+" + "-".repeat(8) + "+" + "-".repeat(40) + "+");
         for(Register register : serviceRegister.list()) {
             register.print();
-            System.out.println();
         }
         sc.next();
     }

@@ -19,6 +19,7 @@ public class ViewTeacher extends ViewMain{
         int opc = 0;
 
         do {
+            clear();
             opc = showMenu();
             switch (opc) {
                 case 1:
@@ -47,8 +48,6 @@ public class ViewTeacher extends ViewMain{
     }
 
     private static int showMenu() {
-        System.out.print("\033[H\033[2J");  
-        System.out.flush(); 
         System.out.println("*".repeat(10) + " Student's Menu " + "*".repeat(10));
         System.out.println("\t 1) Create a new Teacher");
         System.out.println("\t 2) Get Teacher by ID");
@@ -235,6 +234,7 @@ public class ViewTeacher extends ViewMain{
     }
 
     private static void listTeachers() throws ProgramNullException, StudentNullException {
+        clear();
         System.out.println("Teachers List");
         for (Person teacher : serviceTeacher.list()){
             teacher.print();

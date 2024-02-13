@@ -3,7 +3,9 @@ package com.uni_sabios.views;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.uni_sabios.exceptions.classroomexceptions.ClassroomNullException;
 import com.uni_sabios.exceptions.fareexceptions.FareNullException;
+import com.uni_sabios.exceptions.periodexceptions.PeriodNullException;
 import com.uni_sabios.exceptions.personexceptions.PersonNullException;
 import com.uni_sabios.exceptions.programexceptions.ProgramNullException;
 import com.uni_sabios.exceptions.studentexceptions.StudentNullException;
@@ -15,7 +17,7 @@ import com.uni_sabios.utils.Format;
 
 public class ViewReports extends ViewMain{
 
-    public static void startMenu() throws SQLException, ProgramNullException, SubjectNullException, FareNullException, PersonNullException, StudentNullException {
+    public static void startMenu() throws SQLException, ProgramNullException, SubjectNullException, FareNullException, PersonNullException, StudentNullException, PeriodNullException, ClassroomNullException {
         int opc = 0;
 
         do {
@@ -32,12 +34,14 @@ public class ViewReports extends ViewMain{
                     break;
                 case 3:
                     incomePerSemester();
+                    sc.next();
                     break;
                 case 4:
                     studentSchedule();
                     break;
                 case 5:
                     orderProgramsByStudents();
+                    sc.next();
                     break;
                 case 0:
                     break;
@@ -69,7 +73,6 @@ public class ViewReports extends ViewMain{
         System.out.println(serviceProgram.getProgram(programId).getName() + "'s Students");
         for(Person person : serviceReport.getStudentbyProgram(programId)){
             person.print();
-            System.out.println();
         }
         
     }
@@ -99,11 +102,20 @@ public class ViewReports extends ViewMain{
         System.out.println("\tTOTAL COST: " + Format.formatoMonedaPesos(TotalSemester));
     }
 
-    private static void incomePerSemester() {
-        
+    private static void incomePerSemester() throws SQLException, PeriodNullException {
+        sc.nextLine();
+        System.out.println("Income per Period...");
+        System.out.print("Period ID: ");
+        int periodId = sc.nextInt();
+        int income = serviceReport.incomeSemester(periodId);
+        clear();
+        System.out.println("*".repeat(26));
+        System.out.println("  PERIOD: " + servicePeriod.getPeriod(periodId).getCode());
+        System.out.println("  INCOME: " + Format.formatoMonedaPesos(income));
+        System.out.println("*".repeat(26));
     }
 
-    private static void studentSchedule() {
+    private static void studentSchedule() throws SubjectNullException, ClassroomNullException {
         sc.nextLine();
         List<Schedule> schedules = null;
         System.out.println("Enter the student's document: ");
@@ -113,9 +125,11 @@ public class ViewReports extends ViewMain{
             studentId = serviceStudent.findByDocument(document).getId();
             schedules = serviceSchedule.listByStudentId(studentId);
             if(schedules != null) {
+                clear();
+                System.out.printf("|%-6S|%-12S|%-15S|%-15S|%-15S|%-40S|\n", "id", "day", "Start Hour", "Final Hour", "Classroom", "Subject");
+                System.out.println("+" + "-".repeat(6) + "+" + "-".repeat(12) + "+" + "-".repeat(15) + "+" + "-".repeat(15) + "+" + "-".repeat(15) + "+" + "-".repeat(40) + "+");
                 for(Schedule schedule : schedules) {
                     schedule.print();
-                    System.out.println();
                 }
             } else {
                 System.out.println("No schedules found for student with ID: " + studentId);
@@ -127,7 +141,11 @@ public class ViewReports extends ViewMain{
     }
         
     private static void orderProgramsByStudents() {
-
+        clear();
+        System.out.printf("|%-30S|%-10S|\n", "program name", "Num Std");
+        System.out.println("+" + "-".repeat(30) + "+" + "-".repeat(10) + "+");
+        serviceReport.orderProgramsByStudents();
+        System.out.println("+" + "-".repeat(30) + "+" + "-".repeat(10) + "+");
     }
     
 }

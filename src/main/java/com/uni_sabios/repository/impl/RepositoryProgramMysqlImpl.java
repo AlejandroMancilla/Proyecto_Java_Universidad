@@ -85,4 +85,19 @@ public class RepositoryProgramMysqlImpl implements RepositoryProgram{
         }
     }
 
+    public void OrderPrograms() {
+        
+    }
+
+    public void orderPrograms() {
+        try (PreparedStatement pstmt = getConnection().prepareStatement("SELECT p.program_name, COUNT(s.student_id) AS std_pro FROM students s INNER JOIN programs p ON p.program_id = s.program_id GROUP BY p.program_id ORDER BY std_pro DESC;");) {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                while (rs.next()) {
+                    System.out.printf("|%30S|%10S|\n", rs.getString("program_name"), rs.getInt("std_pro"));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

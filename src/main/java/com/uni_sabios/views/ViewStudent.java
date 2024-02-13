@@ -50,7 +50,7 @@ private static final ServiceAddress serviceAddress = new ServiceAddressImpl(new 
                 case 5:
                     listStudents();
                     break;
-                case 6:
+                case 0:
                     break;
                 default:
                     System.out.println("Not Available Choice");
@@ -278,9 +278,9 @@ private static final ServiceAddress serviceAddress = new ServiceAddressImpl(new 
     private static void listStudents() throws ProgramNullException, StudentNullException {
         clear();
         System.out.println("*".repeat(35) + " STUDENT'S LIST " + "*".repeat(35));
-        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+" + "-".repeat(15) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+");
-        System.out.printf("|%-5s|%-15s|%-30s|%-15s|%-15s|%-30s|\n", "DOC", "ID", "FULL NAME", "PHONE NUMBER", "BIRTHDATE", "PROGRAM");
-        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+" + "-".repeat(15) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+");
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+" + "-".repeat(15) + "+" + "-".repeat(15) + "+");
+        System.out.printf("|%-5s|%-15s|%-30s|%-15s|%-15s|\n", "DOC", "ID", "FULL NAME", "PHONE NUMBER", "BIRTHDATE");
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+" + "-".repeat(15) + "+" + "-".repeat(15) + "+");
         for (Person student : serviceStudent.list()) {
             student.print();
         }

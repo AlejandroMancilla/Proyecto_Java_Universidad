@@ -10,6 +10,8 @@ public interface RepositoryRegister {
 
     List<Register> listByStudentId(String document, int period);
 
+    int listByPeriod(int periodId);
+
     Register getRegister(int registerId);
 
     void create(Register register);

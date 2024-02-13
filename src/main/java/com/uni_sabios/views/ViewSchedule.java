@@ -1,11 +1,14 @@
 package com.uni_sabios.views;
 
+import com.uni_sabios.exceptions.classroomexceptions.ClassroomNullException;
 import com.uni_sabios.exceptions.scheduleexceptions.ScheduleNullException;
+import com.uni_sabios.exceptions.subjectexceptions.SubjectNullException;
+import com.uni_sabios.repository.models.Register;
 import com.uni_sabios.repository.models.Schedule;
 
 public class ViewSchedule extends ViewMain{
 
-    public static void startMenu() {
+    public static void startMenu() throws SubjectNullException, ClassroomNullException {
         clear();
         int opc = 0;
 
@@ -14,20 +17,33 @@ public class ViewSchedule extends ViewMain{
             switch (opc) {
                 case 1:
                     createSchedule();
+                    sc.next();
                     break;
                 case 2:
                     printSchedule();
+                    sc.next();
                     break;
                 case 3:
                     modifySchedule();
                     break;
+                case 4:
+                    listSchedules();
+                    sc.next();
                 case 0:
                     break;
                 default:
                     System.out.println("Not Available Choice");
                     sc.next();
             }
-        }while(opc>0 && opc<5);
+        }while(opc>0);
+    }
+
+    private static void listSchedules() throws SubjectNullException, ClassroomNullException {
+        clear();
+        System.out.printf("|%-6s|%-12s|%-15s|%-15s|%-15s|%-15s|\n", "ID", "DAY", "HOUR START", "HOUR END", "CLASSROOM", "SIGNATURE");
+        for(Schedule schedule : serviceSchedule.list()) {
+            schedule.print();
+        }
     }
 
     private static int showMenu() {
@@ -35,6 +51,7 @@ public class ViewSchedule extends ViewMain{
         System.out.println("\t 1) Asign a new Schedule");
         System.out.println("\t 2) Get Schedule by ID");
         System.out.println("\t 3) Edit Schedule");
+        System.out.println("\t 4) List Schedules");
         System.out.println("\t 0) Return to Main Menu");
         System.out.println("*".repeat(35));
         System.out.print("Choose an Option: ");
@@ -78,8 +95,9 @@ public class ViewSchedule extends ViewMain{
     private static void createSchedule(){
         sc.nextLine();
         System.out.println("Creating new Schedule...");
-        System.out.print("\t Day: ");
+        System.out.println("\t Day: ");
         String day = showDays();
+        sc.nextLine();
         System.out.print("\t Start Hour: ");
         String start = sc.nextLine();
         System.out.print("\t Finish Hour: ");
@@ -90,6 +108,7 @@ public class ViewSchedule extends ViewMain{
         int subject = sc.nextInt();
         Schedule schedule = new Schedule(day, start, end, classroom, subject);
         serviceSchedule.create(schedule);
+        System.out.println("Schedule created successfully");
     }
 
     private static Schedule getSchedule() {
@@ -104,7 +123,7 @@ public class ViewSchedule extends ViewMain{
         }
     }
 
-    private static void printSchedule() {
+    private static void printSchedule() throws SubjectNullException, ClassroomNullException {
         System.out.println("Searching a Schedule...");
         sc.nextLine();
         System.out.print("ID: ");

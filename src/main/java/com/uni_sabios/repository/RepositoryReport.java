@@ -11,4 +11,9 @@ public interface RepositoryReport {
     List<Person> getStudentbyProgram(int program) throws SQLException;
 
     List<Register> calculateSemester(String document, int period);
+
+    int incomeSemester(int period);
+
+    void orderProgramsByStudents();
+
 }

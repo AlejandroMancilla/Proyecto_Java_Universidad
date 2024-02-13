@@ -17,4 +17,4 @@ TRUNCATE TABLE uni_sabios.tuitions;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
-
+SELECT * FROM registers r INNER JOIN students s ON r.student_id = s.student_id INNER JOIN persons p ON p.person_id = s.person_id WHERE r.period_id = 1;

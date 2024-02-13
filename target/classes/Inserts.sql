@@ -211,4 +211,10 @@ INSERT INTO tuitions (period_id, program_id, credit_cost) VALUES
 (3, 5, 250000), (3, 6, 220000), (3, 7, 150000), (3, 8, 320000);
 
 
-SELECT * FROM persons p INNER JOIN students s ON p.person_id = s.person_id
+INSERT INTO schedules (schedule_day, start_time, end_time, classroom_id, signature_id) VALUES
+(1, '09:00:00', '11:00:00', 1, 1),
+(2, '13:00:00', '15:00:00', 3, 3),
+(3, '18:00:00', '20:00:00', 4, 5),
+(4, '08:00:00', '10:00:00', 7, 5),
+(5, '06:00:00', '08:00:00', 8, 6);
+

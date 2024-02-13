@@ -24,5 +24,15 @@ public class ServiceReportImpl implements ServiceReport{
     public List<Register> calculateSemester(String document, int period) {
         return this.crudRepositoryReport.calculateSemester(document, period);
     }
+
+    @Override
+    public int incomeSemester(int periodId) throws SQLException {
+        return this.crudRepositoryReport.incomeSemester(periodId);
+    }
+
+    @Override
+    public void orderProgramsByStudents() {
+        this.crudRepositoryReport.orderProgramsByStudents();
+    }
     
 }

@@ -11,5 +11,8 @@ public interface ServiceReport {
     List<Person> getStudentbyProgram(int program) throws SQLException;
 
     List<Register> calculateSemester(String document, int period);
+
+    int incomeSemester(int periodId) throws SQLException;
     
+    void orderProgramsByStudents();
 }

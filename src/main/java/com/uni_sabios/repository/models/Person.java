@@ -57,10 +57,8 @@ public class Person {
     }
 
     public void print() throws ProgramNullException, StudentNullException{
-        Student s = serviceStudent.findbyId(getId());
-        Program p = serviceProgram.getProgram(s.getProgramId());
-        System.out.printf("|%-5s|%-15s|%-30s|%-15s|%-15s|%-30s|\n", getTypeId(), getId(), getFullName(), getPhoneNumber(), getDateBirth(), p.getName());
-        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+" + "-".repeat(15) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+");
+        System.out.printf("|%-5s|%-15s|%-30s|%-15s|%-15s|\n", getTypeId(), getId(), getFullName(), getPhoneNumber(), getDateBirth());
+        System.out.println("+" + "-".repeat(5) + "+" + "-".repeat(15) + "+" + "-".repeat(30) + "+" + "-".repeat(15) + "+" + "-".repeat(15) + "+");
     }
 }
 

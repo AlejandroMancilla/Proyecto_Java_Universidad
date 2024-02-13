@@ -1,4 +1,4 @@
-ELIMITER //
+DELIMITER //
 CREATE FUNCTION validate_id_teachers (new_id int)
 RETURNS BOOLEAN DETERMINISTIC
 BEGIN
@@ -12,6 +12,7 @@ BEGIN
 END; //
 
 
+DROP FUNCTION IF EXISTS validate_classroom_day;
 CREATE FUNCTION validate_classroom_day (class_day VARCHAR(10), current_classroom_id int)
 RETURNS BOOLEAN DETERMINISTIC
 BEGIN
@@ -34,6 +35,7 @@ BEGIN
 	RETURN (@validate_start OR @validate_end);
 END; //
 
+DROP FUNCTION IF EXISTS validate_student_signature;
 CREATE FUNCTION validate_student_signature (current_student INT, current_signature INT)
 RETURNS BOOLEAN
 DETERMINISTIC
@@ -41,12 +43,12 @@ BEGIN
     DECLARE signature_count INT;
     
     SELECT COUNT(*) INTO signature_count
-    FROM register r
+    FROM registers r
     WHERE r.student_id = current_student AND r.signature_id = current_signature;
-    
     RETURN (signature_count > 0);
 END; //
 
+DROP FUNCTION IF EXISTS validate_student_schedule;
 CREATE FUNCTION validate_student_schedule (id_student INT, new_time_start TIME, new_time_end TIME)
 RETURNS BOOLEAN
 DETERMINISTIC
@@ -54,9 +56,10 @@ BEGIN
 	RETURN (SELECT 1 IN (SELECT validate_student_disponibility(new_time_start,new_time_end,s2.start_time,s2.end_time) FROM registers r INNER JOIN signatures s ON r.signature_id = s.signature_id INNER JOIN schedules s2 ON s2.signature_id = s.signature_id WHERE r.student_id = id_student));
 END; //
 
+DROP FUNCTION IF EXISTS validate_schedule_signature;
 CREATE FUNCTION validate_schedule_signature (id_signature INT)
 RETURNS BOOLEAN
 DETERMINISTIC
 BEGIN
-	RETURN (SELECT id_signature IN (SELECT signture_id FROM schedules));
+	RETURN (SELECT id_signature IN (SELECT signature_id FROM schedules));
 END; //

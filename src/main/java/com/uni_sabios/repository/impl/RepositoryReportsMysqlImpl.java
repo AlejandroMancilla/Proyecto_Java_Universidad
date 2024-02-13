@@ -21,6 +21,16 @@ public class RepositoryReportsMysqlImpl implements RepositoryReport {
         return repositoryRegisterMysqlImpl.listByStudentId(document, period);
     }
 
+    @Override
+    public int incomeSemester(int period) {
+        RepositoryRegisterMysqlImpl repositoryRegisterMysqlImpl = new RepositoryRegisterMysqlImpl();
+        return repositoryRegisterMysqlImpl.listByPeriod(period);
+    }
 
-    
+    @Override
+    public void orderProgramsByStudents() {
+        RepositoryProgramMysqlImpl repositoryProgramMysqlImpl = new RepositoryProgramMysqlImpl();
+        repositoryProgramMysqlImpl.orderPrograms();
+    }
+  
 }

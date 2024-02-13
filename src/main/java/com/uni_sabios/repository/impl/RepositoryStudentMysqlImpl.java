@@ -9,11 +9,8 @@ import java.util.List;
 import com.uni_sabios.exceptions.personexceptions.PersonExceptionInsertDataBase;
 import com.uni_sabios.repository.RepositoryStudent;
 import com.uni_sabios.repository.models.Person;
-import com.uni_sabios.repository.models.Schedule;
 import com.uni_sabios.repository.models.Student;
 import com.uni_sabios.utils.conexiondb.conexionbdmysql.ConexionBDMysql;
-
-
 
 public class RepositoryStudentMysqlImpl implements RepositoryStudent{
     
